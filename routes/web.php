@@ -18,3 +18,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+
+// Promotions
+Route::resource('promotion', 'Promotions\PromotionController');
