@@ -15,6 +15,16 @@ class CreatePromotionsTable extends Migration
     {
         Schema::create('promotions', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id')->unsigned();
+
+            $table->string('company');
+            $table->string('promotionname');
+            $table->text('promotiondesc');
+            $table->string('phone');
+            $table->string('website')->nullable();
+            $table->string('address');
+
+            $table->tinyInteger('active')->default(0);
             $table->timestamps();
         });
     }

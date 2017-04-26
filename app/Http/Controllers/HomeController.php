@@ -21,8 +21,11 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('home');
+        $promotions = $request->user()->promotions()->get();
+        return view('home', [
+          'promotions' => $promotions,
+        ]);
     }
 }
