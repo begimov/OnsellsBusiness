@@ -20,11 +20,12 @@
                 <a href="{{ route('promotion.show', $promotion->id) }}">
                   {{ mb_substr($promotion->promotionname, 0, 30) }}{{ (strlen($promotion->promotionname) >= 30) ? '...' : '' }}
                 </a>
-                @if ($promotion->active === 0)
+                @if ($promotion->active == 0)
                 <span class="label label-danger">На модерации</span>
                 @else
                 <span class="label label-success">Опубликовано</span>
                 @endif
+                {{ $promotion->category->name }}
               </strong>
               <p>{{ mb_substr($promotion->promotiondesc, 0, 100) }}{{ (strlen($promotion->promotiondesc) >= 100) ? '...' : '' }}</p>
               <a class="btn btn-primary btn-sm" href="{{ route('promotion.show', $promotion->id) }}" role="button">Предпросмотр</a>

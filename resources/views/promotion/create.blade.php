@@ -13,23 +13,24 @@
 
             <div class="form-group">
               <label for="category">Категория</label>
-              <select name="category" class="form-control">
-                <option selected="selected">Выберите категорию акции</option>
-                <optgroup label="">
-                  <option value=""></option>
-                </optgroup>
+              @if ($errors->has('category'))
+              <div class="help-block alert-danger">
+                <p>{{ $errors->first('category') }}</p>
+              </div>
+              @endif
+              <select name="category" id="category" class="form-control">
+                @foreach ($categories as $category)
+                  @unless (isset($category->parent_id))
+                  <optgroup label="{{ $category->name }}">
+                    @foreach ($category->subcategories as $subcategory)
+                      <option value="{{ $subcategory->id }}">{{ $subcategory->name }}</option>
+                    @endforeach
+                  </optgroup>
+                  @endunless
+                @endforeach
               </select>
             </div>
-            <!-- Авто (АЗС, автосервисы, салоны, мойки, страхование авто)
-            Всё для дома (Мебель, техника, шторы)
-            Дети (Частные сады, студии, детские центры)
-            Еда (Кафе, бары, пабы, рестораны, доставка)
-            Зоо (Ветеринарные клиники, зоомагазины, зоосалоны, услуги для животных)
-            Красота и здоровье (Салоны, клиники, стоматологии, фитнес)
-            Магазины (Универсамы, супермаркеты, обувные магазины, магазины с одеждой)
-            Обучение (Иностранные языки, танцы, спорт)
-            Развлечения (Кинотеатры, мероприятия, квесты, боулинг и бильярд, аквапарки)
-            Услуги (Ремонт, страхование, юридическая помощь, туризм) -->
+
             <div class="form-group">
               <label for="company">Название компании</label>
               @if ($errors->has('company'))
@@ -57,7 +58,9 @@
                 <p>{{ $errors->first('promotiondesc') }}</p>
               </div>
               @endif
-              <textarea rows="4" cols="30" class="form-control" name="promotiondesc" id="promotiondesc" placeholder="50% скидка на все меню с 12 до 15 часов каждый будний день...">{{ old('promotiondesc') }}</textarea>
+              <pre>
+                <textarea rows="4" cols="30" class="form-control" name="promotiondesc" id="promotiondesc" placeholder="50% скидка на все меню с 12 до 15 часов каждый будний день...">{{ old('promotiondesc') }}</textarea>
+              </pre>
             </div>
 
             <!-- <div class="form-group">
@@ -106,15 +109,4 @@
   </div>
 </div>
 </div>
-<script>
-$(document).ready(function(){
-    $("#category").on("change",function(){
-        var selectedVal=$( "#category option:selected" ).val();
-        $("#subcategory > optgroup").attr("disabled","disabled");
-        //$("#subcategory > optgroup").hide(); // you can also hide option insted make them just disabled
-        $('#subcategory > optgroup[label="'+selectedVal+'"]').removeAttr("disabled");
-       // $('#subcategory > optgroup[label="'+selectedVal+'"]').show()
-    });
-});
-</script>
 @endsection

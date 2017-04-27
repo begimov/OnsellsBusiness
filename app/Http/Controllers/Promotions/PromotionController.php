@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Promotions;
 
+use Illuminate\Support\Facades\DB;
 use App\Models\Promotions\Promotion;
+use App\Models\Promotions\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Promotions\StorePromotionRequest;
@@ -32,7 +34,11 @@ class PromotionController extends Controller
      */
     public function create()
     {
-        return view('promotion.create');
+        $categories = Category::orderBy('weight', 'desc')->get();
+        return view('promotion.create', [
+            'categories' => $categories
+          ]);
+
     }
 
     /**
@@ -45,6 +51,7 @@ class PromotionController extends Controller
     {
         $promotion = new Promotion;
 
+        $promotion->category_id = $request->category;
         $promotion->company = $request->company;
         $promotion->promotionname = $request->promotionname;
         $promotion->promotiondesc = $request->promotiondesc;
