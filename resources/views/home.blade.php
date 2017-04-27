@@ -12,7 +12,7 @@
           <div class="media">
             <div class="media-left">
               <a href="{{ route('promotion.show', $promotion->id) }}">
-                <img class="media-object" src="..." alt="{{ $promotion->promotionname }}" width="100" height="100">
+                <img class="media-object" src="" alt="{{ $promotion->promotionname }}">
               </a>
             </div>
             <div class="media-body">

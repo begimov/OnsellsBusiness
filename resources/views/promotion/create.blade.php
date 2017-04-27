@@ -7,7 +7,7 @@
       <div class="panel panel-default">
         <div class="panel-heading">Добавить акцию</div>
         <div class="panel-body">
-          <form action="{{ route('promotion.store') }}" method="post">
+          <form action="{{ route('promotion.store') }}" method="post" enctype="multipart/form-data">
 
             {{ csrf_field() }}
 
@@ -63,10 +63,15 @@
               </pre>
             </div>
 
-            <!-- <div class="form-group">
-            <label for="image">Добавить фото</label>
-            <input type="file" id="image">
-          </div> -->
+            <div class="form-group">
+            <label for="image">Изображение для акции</label>
+            @if ($errors->has('image'))
+            <div class="help-block alert-danger">
+              <p>{{ $errors->first('image') }}</p>
+            </div>
+            @endif
+            <input type="file" name="image" id="image">
+          </div>
 
           <div class="form-group">
             <label for="phone">Номер телефона</label>

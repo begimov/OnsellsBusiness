@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Promotions;
 
+use Image;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Promotions\Promotion;
 use App\Models\Promotions\Category;
 use Illuminate\Http\Request;
@@ -11,7 +13,6 @@ use App\Http\Requests\Promotions\StorePromotionRequest;
 
 class PromotionController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('auth');
@@ -38,7 +39,6 @@ class PromotionController extends Controller
         return view('promotion.create', [
             'categories' => $categories
           ]);
-
     }
 
     /**
@@ -60,6 +60,22 @@ class PromotionController extends Controller
         $promotion->address = $request->address;
 
         $promotion->user()->associate($request->user());
+
+        if ($request->file('image')) {
+            $userId = $request->user()->id;
+            $path = $request->file('image')->store("promoimages/userId_{$userId}", 'public');
+            $relativePublicPath = Storage::url($path);
+            Image::make(public_path() . $relativePublicPath)->encode('png')->fit(100, 100, function ($c) {
+                $c->upsize();
+            })->save();
+
+            // TODO: Prepare and Save different sized images
+            // TODO: Add images ids to respective Promotions table columns (small_image, medium_image, large_image ???)
+            // TODO: Create migration for promotion_images table and save $relativePublicPath to path column
+            // TODO: refactor images functionality to separate method
+            // TODO: REFACTOR ALL CODE!!!!!!!!
+        }
+
         $promotion->save();
 
         return redirect()->route('home');
