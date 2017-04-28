@@ -10,11 +10,13 @@
           @if (count($promotions) > 0)
           @foreach ($promotions as $promotion)
           <div class="media">
+            @if (count($promotion->images) > 0)
             <div class="media-left">
               <a href="{{ route('promotion.show', $promotion->id) }}">
-                <img class="media-object" src="" alt="{{ $promotion->promotionname }}">
+                <img class="media-object" src="{{ $promotion->smallImgPath() }}" alt="{{ $promotion->promotionname }}">
               </a>
             </div>
+            @endif
             <div class="media-body">
               <strong class="media-heading">
                 <a href="{{ route('promotion.show', $promotion->id) }}">
@@ -29,7 +31,7 @@
               </strong>
               <p>{{ mb_substr($promotion->promotiondesc, 0, 100) }}{{ (strlen($promotion->promotiondesc) >= 100) ? '...' : '' }}</p>
               <a class="btn btn-primary btn-sm" href="{{ route('promotion.show', $promotion->id) }}" role="button">Предпросмотр</a>
-              <a class="btn btn-default btn-sm" href="#" role="button">Удалить</a>
+              <!-- <a class="btn btn-default btn-sm" href="#" role="button">Удалить</a> -->
             </div>
           </div>
           <hr>

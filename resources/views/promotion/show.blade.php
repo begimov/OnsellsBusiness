@@ -5,9 +5,11 @@
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
       <div class="panel panel-default">
-        <div class="panel-heading">Временный шаблон предпросмотра, будет совпадать с тем, что увидит пользователь<br>{{ $promotion->promotionname }}</div>
+        <div class="panel-heading">Временный шаблон предпросмотра, будет совпадать с тем, что увидит пользователь<br>{{ $promotion->promotionname }}<br>{{ $promotion->category->name }}</div>
         <div class="panel-body">
-          <p><img class="media-object" src="..." alt="{{ $promotion->promotionname }}" width="100" height="100"></p>
+          @if (count($promotion->images) > 0)
+          <p><img class="media-object" src="{{ $promotion->mediumImgPath() }}" alt="{{ $promotion->promotionname }}"></p>
+          @endif
           <p>{!! nl2br(e($promotion->promotiondesc)) !!}</p>
           <p>{{ $promotion->company }}</p>
           <p>Телефон: {{ $promotion->phone }}</p>

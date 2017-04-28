@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Promotions;
 use Image;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Image as PromotionImage;
 use App\Models\Promotions\Promotion;
 use App\Models\Promotions\Category;
 use Illuminate\Http\Request;
@@ -25,7 +26,7 @@ class PromotionController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return redirect()->route('home');
     }
 
     /**
@@ -36,9 +37,7 @@ class PromotionController extends Controller
     public function create()
     {
         $categories = Category::orderBy('weight', 'desc')->get();
-        return view('promotion.create', [
-            'categories' => $categories
-          ]);
+        return view('promotion.create', compact('categories'));
     }
 
     /**
@@ -50,7 +49,6 @@ class PromotionController extends Controller
     public function store(StorePromotionRequest $request)
     {
         $promotion = new Promotion;
-
         $promotion->category_id = $request->category;
         $promotion->company = $request->company;
         $promotion->promotionname = $request->promotionname;
@@ -58,26 +56,13 @@ class PromotionController extends Controller
         $promotion->phone = $request->phone;
         $promotion->website = $request->website;
         $promotion->address = $request->address;
-
         $promotion->user()->associate($request->user());
-
-        if ($request->file('image')) {
-            $userId = $request->user()->id;
-            $path = $request->file('image')->store("promoimages/userId_{$userId}", 'public');
-            $relativePublicPath = Storage::url($path);
-            Image::make(public_path() . $relativePublicPath)->encode('png')->fit(100, 100, function ($c) {
-                $c->upsize();
-            })->save();
-
-            // TODO: Prepare and Save different sized images
-            // TODO: Add images ids to respective Promotions table columns (small_image, medium_image, large_image ???)
-            // TODO: Create migration for promotion_images table and save $relativePublicPath to path column
-            // TODO: refactor images functionality to separate method
-            // TODO: REFACTOR ALL CODE!!!!!!!!
-        }
-
         $promotion->save();
 
+        if ($request->file('image')) {
+            // dispatch job for processing, saving, uploading to cloud and updating db
+            $this->prepareImages($request->file('image'), $request->user()->id, $promotion);
+        }
         return redirect()->route('home');
     }
 
@@ -89,9 +74,7 @@ class PromotionController extends Controller
      */
     public function show(Promotion $promotion)
     {
-        return view('promotion.show', [
-          'promotion' => $promotion
-        ]);
+        return view('promotion.show', compact('promotion'));
     }
 
     /**
@@ -126,5 +109,34 @@ class PromotionController extends Controller
     public function destroy(Promotion $promotion)
     {
         //
+    }
+
+    public function prepareImages($file, $userId, Promotion $promotion)
+    {
+      $imageSizes = [
+        '100x100.png' => ['png', 100, 100],
+        '200x200.png' => ['png', 200, 200],
+      ];
+
+      $saveDir = "promoimages/userId_{$userId}/promoId_{$promotion->id}";
+      $pathToOriginal = $file->store($saveDir, 'public');
+      $storagePath = config('filesystems.disks.public.root');
+
+      foreach ($imageSizes as $filename => $params) {
+        $path = $storagePath . '/' . $saveDir . '/' . $filename;
+        $relativePath = Storage::url($saveDir . '/' . $filename);
+
+        Image::make($storagePath . '/' . $pathToOriginal)
+          ->encode($params[0])->fit($params[1], $params[2], function ($c) {
+            $c->upsize();
+          })
+          ->save($path);
+
+        $img = new PromotionImage;
+        $img->path = $relativePath;
+        $img->type = $filename;
+        $img->promotion()->associate($promotion);
+        $img->save();
+      }
     }
 }
