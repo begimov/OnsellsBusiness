@@ -23,11 +23,11 @@ class Promotion extends Model
 
     public function smallImgPath()
     {
-        return $this->images()->where('type', '100x100.png')->first()->path;
+        return $this->images()->where('type', 'small')->first()->path;
     }
 
     public function mediumImgPath()
     {
-        return $this->images()->where('type', '200x200.png')->first()->path;
+        return $this->images()->where('type', 'medium')->first()->path;
     }
 }

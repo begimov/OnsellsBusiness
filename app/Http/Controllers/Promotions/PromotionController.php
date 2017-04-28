@@ -113,18 +113,16 @@ class PromotionController extends Controller
 
     public function prepareImages($file, $userId, Promotion $promotion)
     {
-      $imageSizes = [
-        '100x100.png' => ['png', 100, 100],
-        '200x200.png' => ['png', 200, 200],
-      ];
+      $imageSizes = config('images.sizes');
 
       $saveDir = "promoimages/userId_{$userId}/promoId_{$promotion->id}";
       $pathToOriginal = $file->store($saveDir, 'public');
       $storagePath = config('filesystems.disks.public.root');
 
-      foreach ($imageSizes as $filename => $params) {
-        $path = $storagePath . '/' . $saveDir . '/' . $filename;
-        $relativePath = Storage::url($saveDir . '/' . $filename);
+      foreach ($imageSizes as $type => $params) {
+        $fileName = "{$params[1]}x{$params[2]}.{$params[0]}";
+        $path = $storagePath . '/' . $saveDir . '/' . $fileName;
+        $relativePath = Storage::url($saveDir . '/' . $fileName);
 
         Image::make($storagePath . '/' . $pathToOriginal)
           ->encode($params[0])->fit($params[1], $params[2], function ($c) {
@@ -134,7 +132,7 @@ class PromotionController extends Controller
 
         $img = new PromotionImage;
         $img->path = $relativePath;
-        $img->type = $filename;
+        $img->type = $type;
         $img->promotion()->associate($promotion);
         $img->save();
       }
