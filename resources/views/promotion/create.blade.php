@@ -7,7 +7,7 @@
       <div class="panel panel-default">
         <div class="panel-heading">Добавить акцию</div>
         <div class="panel-body">
-          <form action="{{ route('promotion.store') }}" method="post" enctype="multipart/form-data">
+          <form action="{{ route('promotion.store') }}" id="addform" method="post" enctype="multipart/form-data">
 
             {{ csrf_field() }}
 
@@ -105,7 +105,7 @@
             <input type="text" class="form-control" name="address" id="address" placeholder="Улица, дом..." value="{{ old('address') }}">
           </div>
 
-          <button type="submit" class="btn btn-primary">Добавить акцию</button>
+          <button type="submit" id="addpromo" class="btn btn-primary">Добавить акцию</button>
 
         </form>
 
@@ -114,4 +114,13 @@
   </div>
 </div>
 </div>
+@endsection
+
+@section('postJquery')
+    @parent
+    $('#addpromo').click(function() {
+        $(this).attr('disabled','disabled');
+        $('#addform').submit();
+        return true;
+    });
 @endsection
