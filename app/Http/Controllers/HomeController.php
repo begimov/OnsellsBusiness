@@ -24,7 +24,7 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $promotions = $request->user()->promotions()->get();
+        $promotions = $request->user()->promotions()->simplePaginate(5);
         return view('home', compact('promotions'));
     }
 }

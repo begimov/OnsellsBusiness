@@ -128,7 +128,7 @@ class PromotionController extends Controller
           ->encode($params[0])->fit($params[1], $params[2], function ($c) {
             $c->upsize();
           })
-          ->save($path);
+          ->save($path, 90);
 
         $img = new PromotionImage;
         $img->path = $relativePath;

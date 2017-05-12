@@ -34,8 +34,8 @@
               <!-- <a class="btn btn-default btn-sm" href="#" role="button">Удалить</a> -->
             </div>
           </div>
-          <hr>
           @endforeach
+          <div>{{ $promotions->links() }}</div>
           @else
           <p>У Вас пока нет добавленных акций.</p>
           @endif
