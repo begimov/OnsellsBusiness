@@ -89,5 +89,6 @@
             @yield('postJquery');
         });
     </script>
+    @yield('scripts')
 </body>
 </html>

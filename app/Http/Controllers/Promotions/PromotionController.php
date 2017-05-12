@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Image as PromotionImage;
 use App\Models\Promotions\Promotion;
+use App\Models\Promotions\Location;
 use App\Models\Promotions\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -63,6 +64,12 @@ class PromotionController extends Controller
             // dispatch job for processing, saving, uploading to cloud and updating db
             $this->prepareImages($request->file('image'), $request->user()->id, $promotion);
         }
+
+        $location = new Location;
+        $location->location = "{$request->lat},{$request->lng}";
+        $location->promotion()->associate($promotion);
+        $location->save();
+
         return redirect()->route('home');
     }
 

@@ -3,10 +3,11 @@
 @section('content')
 <div class="container">
   <div class="row">
-    <div class="col-md-8 col-md-offset-2">
+    <div class="col-md-12">
       <div class="panel panel-default">
         <div class="panel-heading">Добавить акцию</div>
         <div class="panel-body">
+
           <form action="{{ route('promotion.store') }}" id="addform" method="post" enctype="multipart/form-data">
 
             {{ csrf_field() }}
@@ -20,13 +21,13 @@
               @endif
               <select name="category" id="category" class="form-control">
                 @foreach ($categories as $category)
-                  @unless (isset($category->parent_id))
-                  <optgroup label="{{ $category->name }}">
-                    @foreach ($category->subcategories as $subcategory)
-                      <option value="{{ $subcategory->id }}">{{ $subcategory->name }}</option>
-                    @endforeach
-                  </optgroup>
-                  @endunless
+                @unless (isset($category->parent_id))
+                <optgroup label="{{ $category->name }}">
+                  @foreach ($category->subcategories as $subcategory)
+                  <option value="{{ $subcategory->id }}">{{ $subcategory->name }}</option>
+                  @endforeach
+                </optgroup>
+                @endunless
                 @endforeach
               </select>
             </div>
@@ -64,57 +65,119 @@
             </div>
 
             <div class="form-group">
-            <label for="image">Изображение для акции</label>
-            @if ($errors->has('image'))
-            <div class="help-block alert-danger">
-              <p>{{ $errors->first('image') }}</p>
+              <label for="image">Изображение для акции</label>
+              @if ($errors->has('image'))
+              <div class="help-block alert-danger">
+                <p>{{ $errors->first('image') }}</p>
+              </div>
+              @endif
+              <input type="file" name="image" id="image">
             </div>
-            @endif
-            <input type="file" name="image" id="image">
-          </div>
 
-          <div class="form-group">
-            <label for="phone">Номер телефона</label>
-            @if ($errors->has('phone'))
-            <div class="help-block alert-danger">
-              <p>{{ $errors->first('phone') }}</p>
+            <div class="form-group">
+              <label for="phone">Номер телефона</label>
+              @if ($errors->has('phone'))
+              <div class="help-block alert-danger">
+                <p>{{ $errors->first('phone') }}</p>
+              </div>
+              @endif
+              <input type="text" class="form-control" name="phone" id="phone" placeholder="" value="{{ old('phone') }}">
+              <p class="help-block">Телефон компании для клиентов</p>
             </div>
-            @endif
-            <input type="text" class="form-control" name="phone" id="phone" placeholder="" value="{{ old('phone') }}">
-            <p class="help-block">Телефон компании для клиентов</p>
-          </div>
 
-          <div class="form-group">
-            <label for="website">Адрес сайта</label>
-            @if ($errors->has('website'))
-            <div class="help-block alert-danger">
-              <p>{{ $errors->first('website') }}</p>
+            <div class="form-group">
+              <label for="website">Адрес сайта</label>
+              @if ($errors->has('website'))
+              <div class="help-block alert-danger">
+                <p>{{ $errors->first('website') }}</p>
+              </div>
+              @endif
+              <input type="text" class="form-control" name="website" id="website" placeholder="" value="{{ old('website') }}">
+              <p class="help-block">Ссылка на сайт компании, группу в соц. сети, страницу акции</p>
             </div>
-            @endif
-            <input type="text" class="form-control" name="website" id="website" placeholder="" value="{{ old('website') }}">
-            <p class="help-block">Ссылка на сайт компании, группу в соц. сети, страницу акции</p>
-          </div>
 
-          <div class="form-group">
-            <label for="address">Адрес компании</label>
-            @if ($errors->has('address'))
-            <div class="help-block alert-danger">
-              <p>{{ $errors->first('address') }}</p>
+            <div class="form-group">
+              <label for="address">Адрес акции или компании</label>
+              @if ($errors->has('address'))
+              <div class="help-block alert-danger">
+                <p>{{ $errors->first('address') }}</p>
+              </div>
+              @endif
+              <input type="text" class="form-control" name="address" id="address" placeholder="Улица и дом">
+              <input type="hidden" name="lat" id="lat" value="">
+              <input type="hidden" name="lng" id="lng" value="">
+              @if ($errors->has('lat'))
+              <div class="help-block alert-danger">
+                <p>{{ $errors->first('lat') }}</p>
+              </div>
+              @endif
             </div>
-            @endif
-            <input type="text" class="form-control" name="address" id="address" placeholder="Улица, дом..." value="{{ old('address') }}">
-          </div>
 
-          <button type="submit" id="addpromo" class="btn btn-primary">Добавить акцию</button>
+            <div class="map" id="map-canvas" style="width: 100%; height: 500px; margin-bottom: 30px;"></div>
 
-        </form>
+            <button type="submit" id="addpromo" class="btn btn-primary">Добавить акцию</button>
 
+          </form>
+
+        </div>
       </div>
     </div>
+
   </div>
 </div>
-</div>
 @endsection
+
+@section('scripts')
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMyrdYOJBSg5uF81E3thcJJ2YHe7VrnoE&libraries=places&callback=initMap"></script>
+@endsection
+
+<script type="text/javascript">
+
+function initMap() {
+
+  var mapOptions = {
+    zoom: 13,
+    center: {
+      lat: 59.9307772,
+      lng: 30.3276762
+    }
+  };
+
+  var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+  var autocomplete = new google.maps.places.Autocomplete(document.getElementById('address'));
+  autocomplete.setComponentRestrictions({'country': ['ru']});
+  autocomplete.bindTo('bounds', map);
+
+  var marker = new google.maps.Marker({
+    map: map,
+    anchorPoint: new google.maps.Point(0, -29),
+  });
+
+  autocomplete.addListener('place_changed', function () {
+    var place = autocomplete.getPlace();
+    if (place.geometry) {
+      document.getElementById("address").value = place.formatted_address;
+      map.setCenter(place.geometry.location);
+      map.setZoom(15);
+      marker.setIcon({
+        url: place.icon,
+        size: new google.maps.Size(71, 71),
+        origin: new google.maps.Point(0, 0),
+        anchor: new google.maps.Point(17, 34),
+        scaledSize: new google.maps.Size(35, 35)
+      });
+      marker.setPosition(place.geometry.location);
+      marker.setVisible(true);
+      var lat = place.geometry.location.lat();
+      var lng = place.geometry.location.lng();
+      document.getElementById("lat").value = lat.toString();
+      document.getElementById("lng").value = lng.toString();
+    }
+  });
+
+}
+
+</script>
 
 @section('postJquery')
     @parent
