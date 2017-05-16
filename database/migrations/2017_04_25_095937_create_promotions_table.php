@@ -26,6 +26,9 @@ class CreatePromotionsTable extends Migration
 
             $table->tinyInteger('active')->default(0);
             $table->timestamps();
+            
+            $table->softDeletes();
+
         });
     }
 

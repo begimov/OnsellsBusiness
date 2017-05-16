@@ -17,6 +17,8 @@ class CreateLocationsTable extends Migration
             $table->increments('id');
             $table->integer('promotion_id')->unsigned();
             $table->timestamps();
+
+            $table->softDeletes();
         });
         DB::statement('ALTER TABLE locations ADD location POINT' );
     }

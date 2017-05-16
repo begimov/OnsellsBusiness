@@ -115,7 +115,13 @@ class PromotionController extends Controller
      */
     public function destroy(Promotion $promotion)
     {
-        //
+        $this->authorize('destroy', $promotion);
+
+        $promotion->images()->delete();
+        $promotion->location()->delete();
+        $promotion->delete();
+
+        return redirect()->route('home');
     }
 
     public function prepareImages($file, $userId, Promotion $promotion)

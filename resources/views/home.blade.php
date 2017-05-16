@@ -30,8 +30,14 @@
                 {{ $promotion->category->name }}
               </strong>
               <p>{{ mb_substr($promotion->promotiondesc, 0, 100) }}{{ (strlen($promotion->promotiondesc) >= 100) ? '...' : '' }}</p>
-              <a class="btn btn-primary btn-sm" href="{{ route('promotion.show', $promotion->id) }}" role="button">Предпросмотр</a>
-              <!-- <a class="btn btn-default btn-sm" href="#" role="button">Удалить</a> -->
+              <ul class="list-inline">
+                <li><a class="btn btn-primary btn-sm" href="{{ route('promotion.show', $promotion->id) }}" role="button">Предпросмотр</a></li>
+                <li><form class="delete" action="{{ route('promotion.destroy', $promotion->id) }}" method="POST">
+                  {{ csrf_field() }}
+                  {{ method_field('DELETE') }}
+                  <button type="submit" class="btn btn-default btn-sm">Удалить</button>
+                </form></li>
+              </ul>
             </div>
           </div>
           @endforeach
@@ -39,10 +45,18 @@
           @else
           <p>У Вас пока нет добавленных акций.</p>
           @endif
+          <hr>
           <a class="btn btn-primary" href="{{ route('promotion.create')}}" role="button">Добавить акцию</a>
         </div>
       </div>
     </div>
   </div>
 </div>
+@endsection
+
+@section('postJquery')
+    @parent
+    $(".delete").on("submit", function(){
+        return confirm("Акция будет удалена, вы уверены, что хотите продолжить?");
+    });
 @endsection

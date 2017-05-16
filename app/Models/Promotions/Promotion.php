@@ -3,9 +3,14 @@
 namespace App\Models\Promotions;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Promotion extends Model
 {
+    use SoftDeletes;
+
+    protected $dates = ['deleted_at'];
+
     public function user()
     {
         return $this->belongsTo('App\User');
@@ -29,5 +34,10 @@ class Promotion extends Model
     public function mediumImgPath()
     {
         return $this->images()->where('type', 'medium')->first()->path;
+    }
+
+    public function location()
+    {
+        return $this->hasOne('App\Models\Promotions\Location');
     }
 }
