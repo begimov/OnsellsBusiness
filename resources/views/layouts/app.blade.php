@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
     <script>
@@ -26,6 +27,8 @@
         @include('layouts.partials._navigation')
         <!-- CONTENT -->
         @yield('content')
+        <!-- FOOTER -->
+        @include('layouts.partials._footer')
     </div>
 
     <!-- Scripts -->

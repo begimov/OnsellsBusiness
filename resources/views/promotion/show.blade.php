@@ -3,23 +3,43 @@
 @section('content')
 <div class="container">
   <div class="row">
-    <div class="col-md-8 col-md-offset-2">
+
+    <div class="col-md-8">
       <div class="panel panel-default">
-        <div class="panel-heading">Временный шаблон предпросмотра, будет совпадать с тем, что увидит пользователь<br>{{ $promotion->promotionname }}<br>{{ $promotion->category->name }}</div>
+        <div class="panel-heading"><h4>{{ $promotion->promotionname }}</h4></div>
         <div class="panel-body">
           @if (count($promotion->images) > 0)
-          <p><img class="media-object img-responsive img-rounded" src="{{ $promotion->mediumImgPath() }}" alt="{{ $promotion->promotionname }}"></p>
+            <p>
+              <img class="media-object img-responsive" src="{{ $promotion->mediumImgPath() }}" alt="{{ $promotion->promotionname }}">
+            </p>
           @endif
-          <p>{!! nl2br(e($promotion->promotiondesc)) !!}</p>
-          <p>{{ $promotion->company }}</p>
-          <p>Телефон: {{ $promotion->phone }}</p>
+            <p>{!! nl2br(e($promotion->promotiondesc)) !!}</p>
+        </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="panel panel-default">
+        <div class="panel-heading"><h4>{{ $promotion->company }}</h4></div>
+        <div class="panel-body">
+          <p>
+            <strong>Адрес:</strong><br>
+            {{ $promotion->address }}
+          </p>
           @isset($promotion->website)
-            <p>Сайт: {{ $promotion->website }}</p>
+            <p>
+              <strong>Сайт:</strong><br>
+              <a href="{{ $promotion->website }}">{{ $promotion->website }}</a>
+            </p>
           @endisset
-          <p>Адрес: {{ $promotion->address }}</p>
+          <p>
+            <strong>Телефон:</strong><br>
+            {{ $promotion->phone }}
+          </p>
         </div>
       </div>
     </div>
+
   </div>
 </div>
 @endsection

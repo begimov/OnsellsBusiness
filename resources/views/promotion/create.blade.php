@@ -128,7 +128,7 @@
 @endsection
 
 @section('scripts')
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMyrdYOJBSg5uF81E3thcJJ2YHe7VrnoE&libraries=places&callback=initMap"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLEMAPS_API_KEY') }}&libraries=places&callback=initMap"></script>
 @endsection
 
 <script type="text/javascript">

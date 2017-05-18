@@ -1,0 +1,56 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 100px;
+  background-color: #e8f0f2;
+}
+
+/* Footer */
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 100px;
+  background-color: #2e353b;
+}
+
+.text-footer {
+  margin: 10px 0;
+  color: #adbdca;
+}
+
+/* Navigation bar */
+.navbar-inverse {
+  background-color: #2e353b;
+  color: #fff;
+}
+
+/* MAP */
+.map {
+  width: 100%;
+  height: 500px;
+  margin-bottom: 30px;
+}
+
+/* Search box */
+.btn-index-search {
+  background-color: #2e353b;
+  color: #fff;
+}
+
+/* Promotions cards */
+.thumbnail {
+  background-color: #fff;
+}
+
+/* CategoriesListing component */
+.panel > .panel-heading {
+  background-image: none;
+  background-color: #2e353b;
+  color: #fff;
+}
