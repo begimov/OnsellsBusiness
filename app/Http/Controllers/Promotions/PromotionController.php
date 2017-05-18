@@ -121,7 +121,7 @@ class PromotionController extends Controller
         $promotion->location()->delete();
         $promotion->delete();
 
-        return redirect()->route('home');
+        return back();
     }
 
     public function prepareImages($file, $userId, Promotion $promotion)

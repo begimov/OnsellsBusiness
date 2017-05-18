@@ -22,6 +22,6 @@ class PromotionPolicy
 
     public function destroy(User $user, Promotion $promotion)
     {
-        return $user->id === $promotion->user_id;
+        return $user->id === $promotion->user_id || $user->isModerator();
     }
 }
