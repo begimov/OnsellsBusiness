@@ -92,7 +92,10 @@
                 <p>{{ $errors->first('website') }}</p>
               </div>
               @endif
-              <input type="text" class="form-control" name="website" id="website" placeholder="" value="{{ old('website') }}">
+              <div class="input-group">
+                <span class="input-group-addon" id="basic-addon3">http://</span>
+                <input type="text" class="form-control" name="website" id="website" placeholder="" value="{{ old('website') }}">
+              </div>
               <p class="help-block">Ссылка на сайт компании, группу в соц. сети, страницу акции</p>
             </div>
 
