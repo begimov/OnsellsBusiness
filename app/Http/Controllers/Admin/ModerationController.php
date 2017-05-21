@@ -10,7 +10,11 @@ class ModerationController extends Controller
 {
     public function index()
     {
-        $promotions = Promotion::where('active', 0)->simplePaginate(5);
+        $promotions = Promotion::where('active', 0)
+          ->with('images')
+          ->with('smallImage')
+          ->with('category')
+          ->simplePaginate(5);
         return view('admin.moderation', compact('promotions'));
     }
 

@@ -13,7 +13,7 @@
             @if (count($promotion->images) > 0)
             <div class="media-left">
               <a href="{{ route('promotion.show', $promotion->id) }}">
-                <img class="media-object" src="{{ $promotion->smallImgPath() }}" alt="{{ $promotion->promotionname }}">
+                <img class="media-object" src="{{ $promotion->smallImage->path }}" alt="{{ $promotion->promotionname }}">
               </a>
             </div>
             @endif

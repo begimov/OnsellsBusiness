@@ -36,6 +36,11 @@ class Promotion extends Model
         return $this->images()->where('type', 'medium')->first()->path;
     }
 
+    public function smallImage()
+    {
+        return $this->hasOne('App\Models\Image')->where('type', 'small');
+    }
+
     public function location()
     {
         return $this->hasOne('App\Models\Promotions\Location');
