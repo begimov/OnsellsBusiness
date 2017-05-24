@@ -6,6 +6,7 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Traits\CaptchaTrait;
 
 class RegisterController extends Controller
 {
@@ -20,7 +21,7 @@ class RegisterController extends Controller
     |
     */
 
-    use RegistersUsers;
+    use RegistersUsers, CaptchaTrait;
 
     /**
      * Where to redirect users after registration.
@@ -47,10 +48,14 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        $data['captcha'] = $this->captchaCheck();
+
         return Validator::make($data, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
+            'g-recaptcha-response' => 'required',
+            'captcha' => 'required|accepted',
         ]);
     }
 
