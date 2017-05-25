@@ -12,7 +12,7 @@
 <body>
 
   <div class="container">
-    
+
     <div class="row">
       <div class="col-md-6 col-sm-6 col-xs-6">
         <img src="{{ asset('img/welcome/logo.png') }}" alt="Onsells">
@@ -28,7 +28,6 @@
           <h1 class="text-uppercase">гиперлокационный<br><strong>сервис №1</strong></h1>
           <img src="{{ asset('img/welcome/vmark.png') }}">
           <h3 class="text-uppercase"><strong>для привлечения клиентов</strong><br>без специальных купонов, QR-кодов и смс.</h3>
-
         </div>
       </div>
       <div class="col-md-4 col-sm-12"></div>
