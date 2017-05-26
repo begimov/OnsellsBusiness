@@ -52,7 +52,7 @@ class PromotionController extends Controller
     public function store(StorePromotionRequest $request)
     {
         $this->authorize('create', Promotion::class);
-        
+
         $promotion = new Promotion;
         $promotion->category_id = $request->category;
         $promotion->company = $request->company;
@@ -143,7 +143,7 @@ class PromotionController extends Controller
 
         Image::make($storagePath . '/' . $pathToOriginal)
           ->encode($params[0])->fit($params[1], $params[2], function ($c) {
-            $c->upsize();
+            // $c->upsize();
           })
           ->save($path, 90);
 
