@@ -28,3 +28,12 @@ Route::group(['middleware' => ['auth', 'role:moderator']], function () {
     Route::get('/moderation/{promotion}/approve', 'Admin\ModerationController@approve')->name('moderation.approve');
     Route::delete('/moderation/{promotion}', 'Promotions\PromotionController@destroy')->name('moderation.delete');
 });
+
+// External redirects
+Route::get('/redirect/{promotion}', function (App\Models\Promotions\Promotion $promotion) {
+  $url = $promotion->website;
+  if ((substr($url, 0, 7) !== 'http://') && (substr($url, 0, 8) !== 'https://')) {
+    return redirect()->to("http://{$url}");
+  }
+  return redirect()->to($url);
+})->name('redirect.external');
