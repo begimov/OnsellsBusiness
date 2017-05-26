@@ -46,7 +46,11 @@
           <p>У Вас пока нет добавленных акций.</p>
           @endif
           <hr>
+          @if (count($promotions) < config('promotions.limit'))
           <a class="btn btn-primary" href="{{ route('promotion.create')}}" role="button">Добавить акцию</a>
+          @else
+          <p class="bg-danger">Добавлено максимальное количество акций. Пожалуйста, удалите неактуальные, чтобы добавить новые.</p>
+          @endif
         </div>
       </div>
     </div>

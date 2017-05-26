@@ -20,6 +20,11 @@ class PromotionPolicy
         //
     }
 
+    public function create(User $user)
+    {
+        return $user->promotions()->count() < config('promotions.limit');
+    }
+
     public function destroy(User $user, Promotion $promotion)
     {
         return $user->id === $promotion->user_id || ($user->isModerator() && $promotion->active === 0);

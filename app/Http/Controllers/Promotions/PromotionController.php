@@ -37,6 +37,8 @@ class PromotionController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Promotion::class);
+
         $categories = Category::orderBy('weight', 'desc')->get();
         return view('promotion.create', compact('categories'));
     }
@@ -49,6 +51,8 @@ class PromotionController extends Controller
      */
     public function store(StorePromotionRequest $request)
     {
+        $this->authorize('create', Promotion::class);
+        
         $promotion = new Promotion;
         $promotion->category_id = $request->category;
         $promotion->company = $request->company;
