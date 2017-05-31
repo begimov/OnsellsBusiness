@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Classes\Analytics\GoogleAnalytics;
 
 class HomeController extends Controller
 {
@@ -24,11 +25,18 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
+        $allPromotions = $request->user()->promotions()->get();
+        $promocount = $allPromotions->count();
+
         $promotions = $request->user()->promotions()
             ->with('images')
             ->with('smallImage')
             ->with('category')
-            ->simplePaginate(5);
-        return view('home', compact('promotions'));
+            ->paginate(5);
+
+        $googleanalytics = new GoogleAnalytics;
+        $viewsData = $googleanalytics->getPromotionsViewsReport($allPromotions);
+
+        return view('home', compact('promotions', 'promocount', 'viewsData'));
     }
 }
