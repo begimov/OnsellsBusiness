@@ -32,26 +32,28 @@ class GoogleAnalytics {
     }
 
     public function getPromotionsViewsReport($promotions) {
-        return Cache::remember(config('googleanalytics.cachename_prefix') . auth()->user()->id, 1440, function () use ($promotions){
-            $promotionPaths = array_map(function ($promo) {
-              return "/promotions/{$promo->id}";
-            },$promotions->all());
+        if (!$promotions->isEmpty()) {
+            return Cache::remember(config('googleanalytics.cachename_prefix') . auth()->user()->id, 1440, function () use ($promotions){
+                $promotionPaths = array_map(function ($promo) {
+                  return "/promotions/{$promo->id}";
+                },$promotions->all());
 
-            $reports = $this->getReports([
-                'start-date' => '30daysAgo',
-                'end-date' => 'today',
-                'metric' => 'ga:pageviews',
-                'dimension' => [
-                    'name' => 'ga:pagePath',
-                    'filter' => [
+                $reports = $this->getReports([
+                    'start-date' => '30daysAgo',
+                    'end-date' => 'today',
+                    'metric' => 'ga:pageviews',
+                    'dimension' => [
                         'name' => 'ga:pagePath',
-                        'operator' => 'IN_LIST',
-                        'expression' => $promotionPaths,
+                        'filter' => [
+                            'name' => 'ga:pagePath',
+                            'operator' => 'IN_LIST',
+                            'expression' => $promotionPaths,
+                        ],
                     ],
-                ],
-            ]);
-            return $this->preparePromotionsViewsReport($reports);
-        });
+                ]);
+                return $this->preparePromotionsViewsReport($reports);
+            });
+        }
     }
 
     private function preparePromotionsViewsReport($reports)
