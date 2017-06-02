@@ -66,7 +66,7 @@ class PromotionController extends Controller
         if ($request->file('image')) {
             // dispatch job for processing, saving, uploading to cloud and updating db
             // TODO: Quejob
-            $imageProcessor->prepareImages($request->file('image'), $request->user()->id, $promotion);
+            $imageProcessor->resizeAndSaveImages($request->file('image'), $promotion);
         }
 
         $location = new Location;
@@ -111,7 +111,7 @@ class PromotionController extends Controller
      */
     public function update(UpdatePromotionsRequest $request, Promotion $promotion, ImageProcessor $imageProcessor)
     {
-        $this->authorize('update', $promotion);
+        $this->authorize('edit', $promotion);
 
         $promotion->category_id = $request->category;
         $promotion->company = $request->company;
@@ -125,7 +125,7 @@ class PromotionController extends Controller
         if ($request->file('image')) {
             // dispatch job for processing, saving, uploading to cloud and updating db
             // TODO: Quejob
-            $imageProcessor->updateImages($request->file('image'), $promotion);
+            $imageProcessor->resizeAndSaveImages($request->file('image'), $promotion);
         }
 
         return back()->with('status', 'Promotion updated!');;
