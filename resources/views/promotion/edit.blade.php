@@ -70,15 +70,16 @@
               </pre>
             </div>
 
-            {{-- <div class="form-group">
+            <div class="form-group">
               <label for="image">Изображение для акции</label>
+              <div><img src="{{ $promotion->mediumImgPath() }}"></div>
               @if ($errors->has('image'))
               <div class="help-block alert-danger">
                 <p>{{ $errors->first('image') }}</p>
               </div>
               @endif
               <input type="file" name="image" id="image">
-            </div> --}}
+            </div>
 
             <div class="form-group">
               <label for="phone">Номер телефона</label>

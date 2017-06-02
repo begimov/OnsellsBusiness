@@ -2,10 +2,7 @@
 
 namespace App\Http\Controllers\Promotions;
 
-use Image;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
-use App\Models\Image as PromotionImage;
 use App\Models\Promotions\Promotion;
 use App\Models\Promotions\Location;
 use App\Models\Promotions\Category;
@@ -13,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Promotions\StorePromotionRequest;
 use App\Http\Requests\Promotions\UpdatePromotionsRequest;
+use App\Classes\Images\ImageProcessor;
 
 class PromotionController extends Controller
 {
@@ -50,7 +48,7 @@ class PromotionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StorePromotionRequest $request)
+    public function store(StorePromotionRequest $request, ImageProcessor $imageProcessor)
     {
         $this->authorize('create', Promotion::class);
 
@@ -67,7 +65,8 @@ class PromotionController extends Controller
 
         if ($request->file('image')) {
             // dispatch job for processing, saving, uploading to cloud and updating db
-            $this->prepareImages($request->file('image'), $request->user()->id, $promotion);
+            // TODO: Quejob
+            $imageProcessor->prepareImages($request->file('image'), $request->user()->id, $promotion);
         }
 
         $location = new Location;
@@ -110,7 +109,7 @@ class PromotionController extends Controller
      * @param  \App\Models\Promotions\Promotion  $promotion
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatePromotionsRequest $request, Promotion $promotion)
+    public function update(UpdatePromotionsRequest $request, Promotion $promotion, ImageProcessor $imageProcessor)
     {
         $this->authorize('update', $promotion);
 
@@ -122,6 +121,12 @@ class PromotionController extends Controller
         $promotion->website = $request->website;
 
         $promotion->save();
+
+        if ($request->file('image')) {
+            // dispatch job for processing, saving, uploading to cloud and updating db
+            // TODO: Quejob
+            $imageProcessor->updateImages($request->file('image'), $promotion);
+        }
 
         return back()->with('status', 'Promotion updated!');;
     }
@@ -141,32 +146,5 @@ class PromotionController extends Controller
         $promotion->delete();
 
         return back();
-    }
-
-    public function prepareImages($file, $userId, Promotion $promotion)
-    {
-      $imageSizes = config('images.sizes');
-
-      $saveDir = "promoimages/userId_{$userId}/promoId_{$promotion->id}";
-      $pathToOriginal = $file->store($saveDir, 'public');
-      $storagePath = config('filesystems.disks.public.root');
-
-      foreach ($imageSizes as $type => $params) {
-        $fileName = "{$params[1]}x{$params[2]}.{$params[0]}";
-        $path = $storagePath . '/' . $saveDir . '/' . $fileName;
-        $relativePath = Storage::url($saveDir . '/' . $fileName);
-
-        Image::make($storagePath . '/' . $pathToOriginal)
-          ->encode($params[0])->fit($params[1], $params[2], function ($c) {
-            // $c->upsize();
-          })
-          ->save($path, 90);
-
-        $img = new PromotionImage;
-        $img->path = $relativePath;
-        $img->type = $type;
-        $img->promotion()->associate($promotion);
-        $img->save();
-      }
     }
 }
