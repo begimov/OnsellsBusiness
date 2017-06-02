@@ -23,7 +23,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request, GoogleAnalytics $googleanalytics)
     {
         $allPromotions = $request->user()->promotions()->get();
         $promocount = $allPromotions->count();
@@ -34,7 +34,6 @@ class HomeController extends Controller
             ->with('category')
             ->paginate(5);
 
-        $googleanalytics = new GoogleAnalytics;
         $viewsData = $googleanalytics->getPromotionsViewsReport($allPromotions);
 
         return view('home', compact('promotions', 'promocount', 'viewsData'));
