@@ -31,6 +31,7 @@
               </strong>
               <p>{{ mb_substr($promotion->promotiondesc, 0, 100) }}{{ (strlen($promotion->promotiondesc) >= 100) ? '...' : '' }}</p>
               <ul class="list-inline">
+                <li><a class="btn btn-primary btn-sm" href="{{ route('promotion.edit', $promotion->id) }}" role="button"><img src="{{ asset('img/home/ic_edit_white_18px.svg') }}"></a></li>
                 <li><a class="btn btn-success btn-sm" href="{{ route('moderation.approve', $promotion->id) }}" role="button">Опубликовать</a></li>
                 <li><form class="delete" action="{{ route('moderation.delete', $promotion->id) }}" method="POST">
                   {{ csrf_field() }}
@@ -50,4 +51,11 @@
     </div>
   </div>
 </div>
+@endsection
+
+@section('postJquery')
+    @parent
+    $(".delete").on("submit", function(){
+        return confirm("Акция будет удалена, вы уверены, что хотите продолжить?");
+    });
 @endsection

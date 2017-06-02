@@ -12,6 +12,7 @@ use App\Models\Promotions\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Promotions\StorePromotionRequest;
+use App\Http\Requests\Promotions\UpdatePromotionsRequest;
 
 class PromotionController extends Controller
 {
@@ -96,7 +97,10 @@ class PromotionController extends Controller
      */
     public function edit(Promotion $promotion)
     {
-        //
+        $this->authorize('edit', $promotion);
+
+        $categories = Category::orderBy('weight', 'desc')->get();
+        return view('promotion.edit', compact('categories', 'promotion'));
     }
 
     /**
@@ -106,9 +110,20 @@ class PromotionController extends Controller
      * @param  \App\Models\Promotions\Promotion  $promotion
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Promotion $promotion)
+    public function update(UpdatePromotionsRequest $request, Promotion $promotion)
     {
-        //
+        $this->authorize('update', $promotion);
+
+        $promotion->category_id = $request->category;
+        $promotion->company = $request->company;
+        $promotion->promotionname = $request->promotionname;
+        $promotion->promotiondesc = $request->promotiondesc;
+        $promotion->phone = $request->phone;
+        $promotion->website = $request->website;
+
+        $promotion->save();
+
+        return back()->with('status', 'Promotion updated!');;
     }
 
     /**

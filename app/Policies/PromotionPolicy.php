@@ -25,6 +25,16 @@ class PromotionPolicy
         return $user->promotions()->count() < config('promotions.limit');
     }
 
+    public function edit(User $user, Promotion $promotion)
+    {
+        return $user->isModerator() && $promotion->active === 0;
+    }
+
+    public function update(User $user, Promotion $promotion)
+    {
+        return $user->isModerator() && $promotion->active === 0;
+    }
+
     public function destroy(User $user, Promotion $promotion)
     {
         return $user->id === $promotion->user_id || ($user->isModerator() && $promotion->active === 0);
