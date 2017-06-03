@@ -33,7 +33,7 @@ class GoogleAnalytics {
 
     public function getPromotionsViewsReport($promotions) {
         if (!$promotions->isEmpty()) {
-            return Cache::remember(config('googleanalytics.cachename_prefix') . auth()->user()->id, 1440, function () use ($promotions){
+            return Cache::remember(config('googleanalytics.cachename_prefix') . auth()->user()->id, 720, function () use ($promotions){
                 $promotionPaths = array_map(function ($promo) {
                   return "/promotions/{$promo->id}";
                 },$promotions->all());
