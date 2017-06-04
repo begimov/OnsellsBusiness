@@ -27,13 +27,11 @@
               @endif
               <select name="category" id="category" class="form-control">
                 @foreach ($categories as $category)
-                @unless (isset($category->parent_id))
                 <optgroup label="{{ $category->name }}">
                   @foreach ($category->subcategories as $subcategory)
                   <option value="{{ $subcategory->id }}" {{ $subcategory->id == $promotion->category->id ? 'selected="selected"' : '' }}>{{ $subcategory->name }}</option>
                   @endforeach
                 </optgroup>
-                @endunless
                 @endforeach
               </select>
             </div>

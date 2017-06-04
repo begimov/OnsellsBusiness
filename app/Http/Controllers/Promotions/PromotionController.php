@@ -37,8 +37,7 @@ class PromotionController extends Controller
     public function create()
     {
         $this->authorize('create', Promotion::class);
-
-        $categories = Category::orderBy('weight', 'desc')->get();
+        $categories = Category::where('parent_id', null)->orderBy('weight', 'desc')->with('subcategories')->get();
         return view('promotion.create', compact('categories'));
     }
 
@@ -97,8 +96,7 @@ class PromotionController extends Controller
     public function edit(Promotion $promotion)
     {
         $this->authorize('edit', $promotion);
-
-        $categories = Category::orderBy('weight', 'desc')->get();
+        $categories = Category::where('parent_id', null)->orderBy('weight', 'desc')->with('subcategories')->get();
         return view('promotion.edit', compact('categories', 'promotion'));
     }
 
