@@ -55,3 +55,8 @@ body {
   background-color: #2e353b;
   color: #fff;
 }
+
+/* Payments */
+iframe {
+  max-width: 100%;
+}
