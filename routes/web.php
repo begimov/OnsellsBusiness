@@ -29,6 +29,13 @@ Route::group(['middleware' => ['auth', 'role:moderator']], function () {
     Route::delete('/moderation/{promotion}', 'Promotions\PromotionController@destroy')->name('moderation.delete');
 });
 
+// Payments, balance and finances
+Route::group(['middleware' => 'auth', 'prefix' => 'payments'], function () {
+    Route::get('/', function () {
+      return view('payments.index');
+    })->name('payments.index');
+});
+
 // External redirects
 Route::get('/redirect/{promotion}', function (App\Models\Promotions\Promotion $promotion) {
   $url = $promotion->website;

@@ -32,6 +32,7 @@
                 @role ('moderator')
                     <li><a href="{{ route('moderation.index') }}">Модерация</a></li>
                 @endrole
+                    <li><a href="{{ route('payments.index') }}">Оплата</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                             {{ Auth::user()->name }} <span class="caret"></span>
