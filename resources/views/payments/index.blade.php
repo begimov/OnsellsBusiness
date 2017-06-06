@@ -17,7 +17,5 @@
 
 @section('postJquery')
     @parent
-    $( document ).ready(function() {
       $('#iframe-yandex').attr('src', $('#iframe-yandex').attr('src'));
-    });
 @endsection
