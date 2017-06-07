@@ -1,0 +1,20 @@
+body {
+	margin-top: 10px;
+	margin-bottom: 50px;
+	background: none;
+	color: #fff;
+}
+
+A:link {
+  text-decoration: none;
+	color: #fff;
+}
+A:visited {
+	text-decoration: none;
+}
+A:active {
+	text-decoration: none;
+}
+A:hover {
+  text-decoration: underline;
+}

@@ -11,9 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->middleware('guest');
+// Index landing
+Route::group(['middleware' => 'guest'], function () {
+    Route::get('/', function () { return view('welcome.index'); })->name('welcome.index');
+    Route::get('/why', function () { return view('welcome.why'); })->name('welcome.why');
+    Route::get('/features', function () { return view('welcome.features'); })->name('welcome.features');
+    Route::get('/control', function () { return view('welcome.control'); })->name('welcome.control');
+    Route::get('/consult', function () { return view('welcome.consult'); })->name('welcome.consult');
+});
 
 Auth::routes();
 
