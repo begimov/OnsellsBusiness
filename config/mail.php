@@ -120,4 +120,8 @@ return [
         ],
     ],
 
+    // CUSTOM
+    // Email for requested consultations
+    'consultations' => 'hello@onsells.ru',
+
 ];

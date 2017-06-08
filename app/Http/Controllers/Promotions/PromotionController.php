@@ -126,7 +126,7 @@ class PromotionController extends Controller
             $imageProcessor->resizeAndSaveImages($request->file('image'), $promotion);
         }
 
-        return back()->with('status', 'Promotion updated!');;
+        return back()->with('status', 'Promotion updated!');
     }
 
     /**

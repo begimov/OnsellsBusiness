@@ -31,3 +31,7 @@
   border: none;
   margin: 20px 0 0 0;
 }
+
+.antispam {
+  display:none;
+}

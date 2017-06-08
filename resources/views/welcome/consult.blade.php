@@ -17,16 +17,25 @@
         </h4>
       </div>
       <div class="col-md-6 col-sm-12">
-        <form action="#" method="post">
+        @if (session('status'))
+          <div class="alert alert-success">
+            {{ session('status') }}
+          </div>
+        @endif
+        <form action="{{ route('welcome.consult.post') }}" method="post">
+          {{ csrf_field() }}
           <div class="form-group">
             <input type="text" name="name" value="" class="form-control input-box" placeholder="ВАШЕ ИМЯ">
           </div>
           <div class="form-group">
-            <input type="text" name="name" value="" class="form-control input-box" placeholder="ВАШ ТЕЛЕФОН">
+            <input type="text" name="phone" value="" class="form-control input-box" placeholder="ВАШ ТЕЛЕФОН">
           </div>
           <div class="form-group">
-            <input type="text" name="name" value="" class="form-control input-box" placeholder="НАЗВАНИЕ КОМПАНИИ">
+            <input type="text" name="company" value="" class="form-control input-box" placeholder="НАЗВАНИЕ КОМПАНИИ">
           </div>
+          <p class="antispam">
+            Оставьте это поле пустым: <input type="text" name="url" />
+          </p>
           <button type="submit" class="btn-get-consult"></button>
         </form>
       </div>

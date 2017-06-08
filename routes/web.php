@@ -12,12 +12,13 @@
 */
 
 // Index landing
-Route::group(['middleware' => 'guest'], function () {
-    Route::get('/', function () { return view('welcome.index'); })->name('welcome.index');
-    Route::get('/why', function () { return view('welcome.why'); })->name('welcome.why');
-    Route::get('/features', function () { return view('welcome.features'); })->name('welcome.features');
-    Route::get('/control', function () { return view('welcome.control'); })->name('welcome.control');
-    Route::get('/consult', function () { return view('welcome.consult'); })->name('welcome.consult');
+Route::group(['middleware' => 'guest', 'namespace' => 'Welcome'], function () {
+    Route::get('/', 'WelcomeController@index')->name('welcome.index');
+    Route::get('/why', 'WelcomeController@why')->name('welcome.why');
+    Route::get('/features', 'WelcomeController@features')->name('welcome.features');
+    Route::get('/control', 'WelcomeController@control')->name('welcome.control');
+    Route::get('/consult', 'WelcomeController@consult')->name('welcome.consult');
+    Route::post('/consult', 'WelcomeController@requestConsult')->name('welcome.consult.post');
 });
 
 Auth::routes();
