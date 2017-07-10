@@ -22,7 +22,7 @@ class ModerationController extends Controller
 
     public function approve(Promotion $promotion, Vk $vk)
     {
-        if (App::environment('production1')) {
+        if (App::environment('production')) {
             $vk->publish($promotion->promotiondesc, $promotion->mediumImgPath(), $promotion->id);
         }
         $promotion->active = 1;
