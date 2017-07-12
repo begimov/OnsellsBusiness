@@ -117,6 +117,7 @@ class PromotionController extends Controller
         $promotion->promotiondesc = $request->promotiondesc;
         $promotion->phone = $request->phone;
         $promotion->website = $request->website;
+        $promotion->active = 0;
 
         $promotion->save();
 

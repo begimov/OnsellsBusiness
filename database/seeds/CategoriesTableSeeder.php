@@ -105,6 +105,18 @@ class CategoriesTableSeeder extends Seeder
         ['parent_id' => 10, 'name' => 'Юридическая помощь', 'slug' => 'yuridicheskaya-pomoshy'],
         ['parent_id' => 10, 'name' => 'Боулинг и бильярд', 'slug' => 'uslugi-bouling-i-bilyard'],
         ['parent_id' => 10, 'name' => 'Туризм', 'slug' => 'turizm'],
+        //Еда
+        ['parent_id' => 4, 'name' => 'Бизнес-ланчи', 'slug' => 'biznes-lanchi'],
+        //Магазины
+        ['parent_id' => 7, 'name' => 'Спорттовары', 'slug' => 'sporttovary'],
+        //Развлечения
+        ['parent_id' => 9, 'name' => 'Аттракционы', 'slug' => 'attrakciony'],
+        ['parent_id' => 9, 'name' => 'Дни рождения', 'slug' => 'dni-rozhdeniya'],
+        ['parent_id' => 9, 'name' => 'Промо-акции и розыгрыши', 'slug' => 'promo-akcii-i-rozygryshi'],
+        //Услуги
+        ['parent_id' => 10, 'name' => 'Аренда', 'slug' => 'arenda'],
+        ['parent_id' => 10, 'name' => 'Прокат', 'slug' => 'prokat'],
+        ['parent_id' => 10, 'name' => 'Фотостудии', 'slug' => 'fotostudii'],
       ];
       foreach ($categories as $key => $value) {
         DB::table('categories')->insert($value);
