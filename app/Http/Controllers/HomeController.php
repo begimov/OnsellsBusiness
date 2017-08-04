@@ -34,11 +34,12 @@ class HomeController extends Controller
             ->with('images')
             ->with('smallImage')
             ->with('category')
-            ->with('applications')
             ->paginate(5);
+
+        $applications = $user->applications()->with('user')->take(1)->get();
 
         $viewsData = $googleanalytics->getPromotionsViewsReport($allPromotions);
 
-        return view('home', compact('promotions', 'promocount', 'viewsData'));
+        return view('home', compact('promotions', 'promocount', 'viewsData', 'applications'));
     }
 }

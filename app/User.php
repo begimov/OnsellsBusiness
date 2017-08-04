@@ -54,6 +54,11 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class, 'users_roles');
     }
 
+    public function applications()
+    {
+        return Models\Promotions\Application::whereIn('promotion_id', $this->promotions->pluck('id'))->latest();
+    }
+
     /**
      * Send the password reset notification.
      *
