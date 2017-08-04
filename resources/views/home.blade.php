@@ -93,7 +93,7 @@
                 @foreach ($applications as $application)
                   <tr>
                     <td colspan="3">
-                      <strong>{{ $application->promotion->promotionname }}:</strong>
+                      <strong><a href="{{ route('promotion.show', $application->promotion->id) }}">&laquo;{{ $application->promotion->promotionname }}&raquo;</a></strong>
                     </td>
                   </tr>
                   <tr>
