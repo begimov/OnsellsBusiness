@@ -81,7 +81,7 @@
         <div class="panel-heading">Последние заявки от клиентов</div>
         <div class="panel-body">
           @if (count($applications) > 0)
-            <table class="table table-condensed table-striped">
+            <table class="table table-striped">
               <thead>
                 <tr>
                   <th>Имя</th>
@@ -93,7 +93,7 @@
                 @foreach ($applications as $application)
                   <tr>
                     <td colspan="3">
-                      Заявка на акцию "{{ $application->promotion_id }}"
+                      <strong>{{ $application->promotion->promotionname }}:</strong>
                     </td>
                   </tr>
                   <tr>
