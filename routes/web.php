@@ -35,6 +35,12 @@ Route::group(['middleware' => ['auth', 'role:moderator']], function () {
     Route::delete('/moderation/{promotion}', 'Promotions\PromotionController@destroy')->name('moderation.delete');
 });
 
+// Manager panel
+// TODO: add separate 'manager' role and related features
+Route::group(['middleware' => ['auth', 'role:moderator']], function () {
+    Route::get('/management', 'Admin\ManagementController@index')->name('management.index');
+});
+
 // Payments, balance and finances
 Route::group(['middleware' => 'auth', 'prefix' => 'payments'], function () {
     Route::get('/', function () {

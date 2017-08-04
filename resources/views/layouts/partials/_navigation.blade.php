@@ -30,6 +30,7 @@
                     <li><a href="{{ route('register') }}">Зарегистрироваться</a></li>
                 @else
                 @role ('moderator')
+                    <li><a href="{{ route('management.index') }}">Управление</a></li>
                     <li><a href="{{ route('moderation.index') }}">Модерация</a></li>
                 @endrole
                     <li><a href="{{ route('payments.index') }}">Оплата</a></li>
