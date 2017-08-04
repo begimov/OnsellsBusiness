@@ -78,9 +78,35 @@
 
     <div class="col-md-5">
       <div class="panel panel-default">
-        <div class="panel-heading">Заявки клиентов</div>
+        <div class="panel-heading">Последние заявки от клиентов</div>
         <div class="panel-body">
-          Пока новых заявок нет
+          @if (count($applications) > 0)
+            <table class="table table-condensed table-striped">
+              <thead>
+                <tr>
+                  <th>Имя</th>
+                  <th>Email</th>
+                  <th>Дата</th>
+                </tr>
+              </thead>
+              <tbody>
+                @foreach ($applications as $application)
+                  <tr>
+                    <td colspan="3">
+                      Заявка на акцию "{{ $application->promotion_id }}"
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>{{ $application->user->name }}</td>
+                    <td><a href="mailto:{{ $application->user->email }}">{{ $application->user->email }}</a></td>
+                    <td>{{ $application->created_at->format('d/m') }}</td>
+                  </tr>
+                @endforeach
+              </tbody>
+            </table>
+          @else
+            Пока новых заявок нет.
+          @endif
         </div>
       </div>
     </div>

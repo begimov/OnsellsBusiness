@@ -36,7 +36,7 @@ class HomeController extends Controller
             ->with('category')
             ->paginate(5);
 
-        $applications = $user->applications()->with('user')->take(1)->get();
+        $applications = $user->applications()->with('user')->take(10)->get();
 
         $viewsData = $googleanalytics->getPromotionsViewsReport($allPromotions);
 
