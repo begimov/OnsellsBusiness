@@ -25,13 +25,16 @@ class HomeController extends Controller
      */
     public function index(Request $request, GoogleAnalytics $googleanalytics)
     {
-        $allPromotions = $request->user()->promotions()->get();
+        $user = $request->user();
+
+        $allPromotions = $user->promotions()->get();
         $promocount = $allPromotions->count();
 
-        $promotions = $request->user()->promotions()
+        $promotions = $user->promotions()
             ->with('images')
             ->with('smallImage')
             ->with('category')
+            ->with('applications')
             ->paginate(5);
 
         $viewsData = $googleanalytics->getPromotionsViewsReport($allPromotions);

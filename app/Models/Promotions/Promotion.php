@@ -45,4 +45,9 @@ class Promotion extends Model
     {
         return $this->hasOne('App\Models\Promotions\Location');
     }
+
+    public function applications()
+    {
+        return $this->hasMany('App\Models\Promotions\Application');
+    }
 }
