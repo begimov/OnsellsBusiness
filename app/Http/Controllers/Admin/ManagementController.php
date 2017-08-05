@@ -12,9 +12,15 @@ class ManagementController extends Controller
 {
     public function index()
     {
-        $businesses = Business::all();
-        $promotions = Promotion::all();
-        $users = User::all();
-        return view('admin.management', compact('businesses', 'promotions', 'users'));
+        $businessesCount = Business::all()->count();
+        $promotionsCount = Promotion::all()->count();
+        $usersCount = User::all()->count();
+
+        $businesses = Business::latest()->with(['promotions'])->paginate(50);
+
+        return view('admin.management', compact(
+            'businessesCount', 'promotionsCount', 'usersCount',
+            'businesses'
+        ));
     }
 }
