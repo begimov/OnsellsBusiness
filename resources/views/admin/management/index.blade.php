@@ -5,13 +5,13 @@
 
     <div class="row text-center">
       <div class="col-md-4 col-sm-4">
-        <h2><small>Бизнесов: </small>{{ $businessesCount }}</h2>
+        <h2><small>Бизнесов: </small>{{ $stats['businessesCount'] }}</h2>
       </div>
       <div class="col-md-4 col-sm-4">
-        <h2><small>Акций: </small>{{ $promotionsCount }}</h2>
+        <h2><small>Акций: </small>{{ $stats['promotionsCount'] }}</h2>
       </div>
       <div class="col-md-4 col-sm-4">
-        <h2><small>Пользователей: </small>{{ $usersCount }}</h2>
+        <h2><small>Пользователей: </small>{{ $stats['usersCount'] }}</h2>
       </div>
     </div>
 
@@ -29,8 +29,16 @@
                 <tr>
                   <th>Имя</th>
                   <th>Email</th>
-                  <th>Дата</th>
-                  <th>Акций</th>
+                  <th>
+                    <a href="{{ route('management.index', ['sortDateOrder' => $nextSortDateOrder]) }}">
+                      Дата
+                    </a>
+                  </th>
+                  <th>
+                    <a href="{{ route('management.index', ['sortPromotionsOrder' => $nextSortPromotionsOrder]) }}">
+                      Акций
+                    </a>
+                  </th>
                   <th>Заявок</th>
                 </tr>
               </thead>
@@ -47,7 +55,10 @@
               </tbody>
             </table>
           </div>
-          <div class="panel-footer">{{ $businesses->links() }}</div>
+          <div class="panel-footer">{{ $businesses->appends([
+              'sortDateOrder' => $sortDateOrder,
+              'sortPromotionsOrder' => $sortPromotionsOrder
+            ])->links() }}</div>
         </div>
       </div>
     </div>

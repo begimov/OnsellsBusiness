@@ -59,6 +59,13 @@ class User extends Authenticatable
         return Models\Promotions\Application::whereIn('promotion_id', $this->promotions->pluck('id'))->latest();
     }
 
+    public function scopePromotionsCount($query){
+        return $query->leftJoin('promotions','promotions.user_id','=','users.id')
+            ->selectRaw('users.*, count(promotions.id) as count')
+            ->where('promotions.deleted_at','=',null)
+            ->groupBy('users.id');
+    }
+
     /**
      * Send the password reset notification.
      *

@@ -10,17 +10,55 @@ use App\Models\Promotions\Promotion;
 
 class ManagementController extends Controller
 {
-    public function index()
+    private $nextSortPromotionsOrder;
+    private $nextSortDateOrder;
+
+    public function index(Request $request)
     {
-        $businessesCount = Business::all()->count();
-        $promotionsCount = Promotion::all()->count();
-        $usersCount = User::all()->count();
+        $stats = $this->getStats();
 
-        $businesses = Business::latest()->with(['promotions'])->paginate(50);
+        $businesses = Business::with(['promotions']);
+        $businesses = $this->sortIndexData($request, $businesses)->paginate(50);
 
-        return view('admin.management', compact(
-            'businessesCount', 'promotionsCount', 'usersCount',
-            'businesses'
-        ));
+        $this->setOrders($request);
+
+        return view('admin.management.index', [
+            'stats' => $stats,
+            'businesses' => $businesses,
+            'nextSortPromotionsOrder' => $this->nextSortPromotionsOrder,
+            'sortPromotionsOrder' => $request->sortPromotionsOrder,
+            'nextSortDateOrder' => $this->nextSortDateOrder,
+            'sortDateOrder' => $request->sortDateOrder
+        ]);
+    }
+
+    public function getStats()
+    {
+        $businessesCount = count(Business::all());
+        $promotionsCount = count(Promotion::all());
+        $usersCount = count(User::all());
+        
+        return compact('businessesCount', 'promotionsCount', 'usersCount');
+    }
+
+    private function sortIndexData(Request $request, $data)
+    {
+        $sortPromotionsOrder = $request->sortPromotionsOrder;
+        if ($sortPromotionsOrder === 'desc' || $sortPromotionsOrder === 'asc') {
+            return $data->promotionsCount()->orderBy('count', $sortPromotionsOrder);
+        }
+
+        $sortDateOrder = $request->sortDateOrder;
+        if ($sortDateOrder === 'oldest') {
+            return $data->oldest();
+        }
+
+        return $data->latest();
+    }
+
+    private function setOrders(Request $request)
+    {
+        $this->nextSortPromotionsOrder = ($request->sortPromotionsOrder === 'desc') ? 'asc' : 'desc';
+        $this->nextSortDateOrder = ($request->sortDateOrder === 'oldest') ? 'latest' : 'oldest';
     }
 }
