@@ -10,25 +10,21 @@ use App\Models\Promotions\Promotion;
 
 class ManagementController extends Controller
 {
-    private $nextSortPromotionsOrder;
-    private $nextSortDateOrder;
-
     public function index(Request $request)
     {
         $stats = $this->getStats();
 
-        $businesses = Business::with(['promotions']);
-        $businesses = $this->sortIndexData($request, $businesses)->paginate(50);
-
-        $this->setOrders($request);
+        $businesses = $this->sortIndexData($request, Business::with(['promotions']))->paginate(50)
+            ->appends([
+                'sortPromotionsOrder' => $request->sortPromotionsOrder,
+                'sortDateOrder' => $request->sortDateOrder
+            ]);
 
         return view('admin.management.index', [
             'stats' => $stats,
             'businesses' => $businesses,
-            'nextSortPromotionsOrder' => $this->nextSortPromotionsOrder,
-            'sortPromotionsOrder' => $request->sortPromotionsOrder,
-            'nextSortDateOrder' => $this->nextSortDateOrder,
-            'sortDateOrder' => $request->sortDateOrder
+            'nextSortPromotionsOrder' => ($request->sortPromotionsOrder === 'desc') ? 'asc' : 'desc',
+            'nextSortDateOrder' => ($request->sortDateOrder === 'oldest') ? 'latest' : 'oldest',
         ]);
     }
 
@@ -37,7 +33,7 @@ class ManagementController extends Controller
         $businessesCount = count(Business::all());
         $promotionsCount = count(Promotion::all());
         $usersCount = count(User::all());
-        
+
         return compact('businessesCount', 'promotionsCount', 'usersCount');
     }
 
@@ -54,11 +50,5 @@ class ManagementController extends Controller
         }
 
         return $data->latest();
-    }
-
-    private function setOrders(Request $request)
-    {
-        $this->nextSortPromotionsOrder = ($request->sortPromotionsOrder === 'desc') ? 'asc' : 'desc';
-        $this->nextSortDateOrder = ($request->sortDateOrder === 'oldest') ? 'latest' : 'oldest';
     }
 }

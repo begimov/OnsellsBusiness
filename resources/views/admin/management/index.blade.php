@@ -55,10 +55,7 @@
               </tbody>
             </table>
           </div>
-          <div class="panel-footer">{{ $businesses->appends([
-              'sortDateOrder' => $sortDateOrder,
-              'sortPromotionsOrder' => $sortPromotionsOrder
-            ])->links() }}</div>
+          <div class="panel-footer">{{ $businesses->links() }}</div>
         </div>
       </div>
     </div>
