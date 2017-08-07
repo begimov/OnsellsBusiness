@@ -19,5 +19,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 // Payments, balance and finances
 Route::group(['prefix' => 'balance', 'namespace' => 'Balance'], function () {
-    Route::post('/', 'BalanceController@recieve');
+    Route::post('/', 'BalanceController@receive');
 });

@@ -15,7 +15,7 @@ class BalanceController extends Controller
         return view('balance.index', compact('prepaid_id'));
     }
 
-    public function recieve(Request $request)
+    public function receive(Request $request)
     {
         $checkHash= sha1($request->notification_type.'&'
             .$request->operation_id.'&'.$request->amount.'&643&'
@@ -28,7 +28,7 @@ class BalanceController extends Controller
         if ($checkHash !== $request->sha1_hash) {
           Log::info('!!!CHECK ERROR');
         } else {
-          // TODO: Job, qeue send notification -> email 
+          // TODO: Job, qeue send notification -> email
           Log::info('!!!CHECK SUCCESS');
         }
         return response()->json(['status' => 'OK']);
