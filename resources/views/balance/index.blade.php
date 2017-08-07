@@ -7,7 +7,7 @@
       <div class="panel panel-default">
         <div class="panel-heading">Баланс</div>
         <div class="panel-body">
-          0 рублей
+          <h1>0 <small>рублей</small></h1>
         </div>
       </div>
     </div>
@@ -19,7 +19,6 @@
 
             <input type="hidden" name="receiver" value="41001225924654">
             <input type="hidden" name="quickpay-form" value="shop">
-            <?php // TODO: Order ID 1 ?>
             <input type="hidden" name="targets" value="транзакция {{$prepaid_id}}">
             <div class="form-group">
               <label for="sum">Сумма пополнения, руб.</label>
@@ -28,7 +27,6 @@
 
             <input type="hidden" name="formcomment" value="Onsells: пополнение баланса">
             <input type="hidden" name="short-dest" value="Onsells: пополнение баланса">
-            <?php // TODO: Order ID 2 ?>
             <input type="hidden" name="label" value="{{$prepaid_id}}">
             <input type="hidden" name="need-fio" value="false">
             <input type="hidden" name="need-email" value="false">
@@ -41,7 +39,7 @@
             <div class="radio">
               <label><input type="radio" name="paymentType" value="PC">Яндекс.Деньгами</label>
             </div>
-            <input type="submit" value="Перевести">
+            <input type="submit" class="btn btn-primary" value="Перевести">
 
           </form>
         </div>
