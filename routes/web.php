@@ -42,10 +42,8 @@ Route::group(['middleware' => ['auth', 'role:moderator']], function () {
 });
 
 // Payments, balance and finances
-Route::group(['middleware' => 'auth', 'prefix' => 'payments'], function () {
-    Route::get('/', function () {
-      return view('payments.index');
-    })->name('payments.index');
+Route::group(['middleware' => 'auth', 'prefix' => 'balance', 'namespace' => 'Balance'], function () {
+    Route::get('/', 'BalanceController@index')->name('payments.index');
 });
 
 // External redirects
