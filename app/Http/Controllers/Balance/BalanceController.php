@@ -4,13 +4,15 @@ namespace App\Http\Controllers\Balance;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class BalanceController extends Controller
 {
     public function index()
     {
-        return view('balance.index');
+        $prepaid_id = Auth::user()->id;
+        return view('balance.index', compact('prepaid_id'));
     }
 
     public function recieve(Request $request)
