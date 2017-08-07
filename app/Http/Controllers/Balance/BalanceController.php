@@ -15,20 +15,16 @@ class BalanceController extends Controller
 
     public function recieve(Request $request)
     {
-        // Log::info('Showing user profile for user: '.$request->sha1_hash);
+        $checkHash= sha1($request->notification_type.'&'
+            .$request->operation_id.'&'.$request->amount.'&643&'
+            .$request->datetime.'&'.$request->sender.'&'
+            .$request->codepro.'&'.env('YANDEX_MONEY_SECRET').'&'
+            .$request->label);
 
-        $sha1 = sha1($request->notification_type.'&'
-            . $request->operation_id.'&'
-            . $request->amount.'&643&'
-            . $request->datetime.'&'
-            . $request->sender.'&'
-            . $request->codepro.'&'
-            . env('YANDEX_MONEY_SECRET').'&'
-            . $request->label);
-
-        if ($sha1 != $_POST['sha1_hash'] ) {
-          echo "ошибка";
-          exit();
+        if ($checkHash !== $request->sha1_hash) {
+          Log::info('!!!CHECK ERROR');
+        } else {
+          Log::info('!!!CHECK SUCCESS');
         }
         return response()->json(['status' => 'OK']);
     }
