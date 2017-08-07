@@ -23,9 +23,12 @@ class BalanceController extends Controller
             .$request->codepro.'&'.env('YANDEX_MONEY_SECRET').'&'
             .$request->label);
 
+            // TODO: Check for unaccepted и codepro
+
         if ($checkHash !== $request->sha1_hash) {
           Log::info('!!!CHECK ERROR');
         } else {
+          // TODO: Job, qeue send notification -> email 
           Log::info('!!!CHECK SUCCESS');
         }
         return response()->json(['status' => 'OK']);
