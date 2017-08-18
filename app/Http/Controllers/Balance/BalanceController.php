@@ -13,8 +13,13 @@ class BalanceController extends Controller
     public function index()
     {
         $prepaid_id = Auth::user()->id;
-        // $balance = Auth::user()->balance;
-        return view('balance.index', compact('prepaid_id'));
+        $balance = Auth::user()->balance;
+        if ($balance) {
+            $amount = $balance->amount;
+        } else {
+            $amount = 0;
+        }
+        return view('balance.index', compact('prepaid_id', 'amount'));
     }
 
     public function receive(Request $request)

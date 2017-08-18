@@ -7,7 +7,7 @@
       <div class="panel panel-default">
         <div class="panel-heading">Баланс</div>
         <div class="panel-body">
-          <h1>0 <small>рублей</small></h1>
+          <h1>{{ $amount }} <small>рублей</small></h1>
         </div>
       </div>
     </div>
