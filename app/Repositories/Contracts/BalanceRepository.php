@@ -4,10 +4,7 @@ namespace App\Repositories\Contracts;
 
 interface BalanceRepository
 {
-    public function findById($id);
+    public function findByUserId($id);
 
-    public function store(array $properties);
-
-    public function update($id, array $properties);
-
+    public function store($userId);
 }

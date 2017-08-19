@@ -12,7 +12,7 @@ use App\Repositories\Contracts\BalanceRepository;
 class BalanceController extends Controller
 {
     protected $balanceRepository;
-    
+
     public function __construct(BalanceRepository $balanceRepository)
     {
         $this->balanceRepository = $balanceRepository;
@@ -32,39 +32,34 @@ class BalanceController extends Controller
 
     public function receive(Request $request)
     {
-      Log::info('!!!!!!!!'.implode(' / ', $request->all()));
-      Log::info('!!!!!!!!'.$request->notification_type);
-      Log::info('!!!!!!!!'.$request->operation_id);
-      Log::info('!!!!!!!!'.$request->amount);
-      Log::info('!!!!!!!!'.$request->label);
-      Log::info('!!!!!!!!'.$request->unaccepted);
+        // TODO: Check for unaccepted и codepro
 
+        if ($this->generateHash($request) == $request->sha1_hash
+            && $request->unaccepted == "false") {
 
-        $checkHash= sha1($request->notification_type.'&'
-            .$request->operation_id.'&'.$request->amount.'&643&'
-            .$request->datetime.'&'.$request->sender.'&'
-            .$request->codepro.'&'.env('YANDEX_MONEY_SECRET').'&'
-            .$request->label);
-
-Log::info('$checkHash'.$checkHash);
-Log::info('$request->sha1_hash'.$request->sha1_hash);
-            // TODO: Check for unaccepted и codepro
-
-        if ($checkHash == $request->sha1_hash && $request->unaccepted == "false") {
             // TODO: Job, qeue send notification -> email
-            Log::info('!!!CHECK SUCCESS');
-            $balance = Balance::where('user_id', $request->label)->first();
+            $balance = $this->balanceRepository->findByUserId($request->label);
+
             if (!$balance) {
-                $balance = new Balance;
-                $balance->user_id = $request->label;
-                $balance->save();
+                $balance = $this->balanceRepository->store($request->label);
             }
+
             $balance->amount += $request->amount;
             $balance->save();
+
             return response()->json(['status' => 'OK']);
 
         } else {
           Log::info('!!!CHECK ERROR');
         }
+    }
+
+    protected function generateHash($request)
+    {
+        return sha1($request->notification_type.'&'
+            .$request->operation_id.'&'.$request->amount.'&643&'
+            .$request->datetime.'&'.$request->sender.'&'
+            .$request->codepro.'&'.env('YANDEX_MONEY_SECRET').'&'
+            .$request->label);
     }
 }

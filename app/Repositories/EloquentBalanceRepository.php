@@ -6,15 +6,14 @@ use App\Repositories\Contracts\BalanceRepository;
 
 class EloquentBalanceRepository implements BalanceRepository
 {
-    public function findById($id) {
-        //
+    public function findByUserId($id) {
+        return Balance::where('user_id', $id)->first();
     }
 
-    public function store(array $properties) {
-        //
-    }
-
-    public function update($id, array $properties) {
-        //
+    public function store($userId) {
+        $balance = new Balance;
+        $balance->user_id = $userId;
+        $balance->save();
+        return $balance;
     }
 }
