@@ -27,29 +27,20 @@ class BalanceController extends Controller
         $user = Auth::user();
 
         $prepaid_id = $user->id;
-        $balance = $user->balance;
+        $amount = $user->balance->amount;
 
-        if ($balance) {
-            $amount = $balance->amount;
-        } else {
-            $amount = 0;
-        }
         return view('balance.index', compact('prepaid_id', 'amount'));
     }
 
     public function receive(Request $request)
     {
-        // TODO: Check for unaccepted и codepro 
+        // TODO: Check for unaccepted и codepro
 
         if ($this->generateHash($request) == $request->sha1_hash
             && $request->unaccepted == "false") {
 
             // TODO: Job, qeue send notification -> email
             $balance = $this->balanceRepository->findByUserId($request->label);
-
-            if (!$balance) {
-                $balance = $this->balanceRepository->store($request->label);
-            }
 
             $this->transactionRepository->store($balance, $request->amount);
 
