@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Repositories\Contracts\BalanceRepository;
+use App\Models\Balance\Balance;
 
 class EloquentBalanceRepository implements BalanceRepository
 {
