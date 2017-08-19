@@ -20,8 +20,11 @@ class BalanceController extends Controller
 
     public function index()
     {
-        $prepaid_id = Auth::user()->id;
-        $balance = Auth::user()->balance;
+        $user = Auth::user();
+
+        $prepaid_id = $user->id;
+        $balance = $user->balance;
+
         if ($balance) {
             $amount = $balance->amount;
         } else {
@@ -33,7 +36,7 @@ class BalanceController extends Controller
     public function receive(Request $request)
     {
         // TODO: Check for unaccepted и codepro
-
+        
         if ($this->generateHash($request) == $request->sha1_hash
             && $request->unaccepted == "false") {
 
