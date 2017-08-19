@@ -8,14 +8,18 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use App\Models\Balance\Balance;
 use App\Repositories\Contracts\BalanceRepository;
+use App\Repositories\Contracts\TransactionRepository;
 
 class BalanceController extends Controller
 {
     protected $balanceRepository;
+    protected $transactionRepository;
 
-    public function __construct(BalanceRepository $balanceRepository)
+    public function __construct(BalanceRepository $balanceRepository,
+        TransactionRepository $transactionRepository)
     {
         $this->balanceRepository = $balanceRepository;
+        $this->transactionRepository = $transactionRepository;
     }
 
     public function index()
@@ -36,7 +40,7 @@ class BalanceController extends Controller
     public function receive(Request $request)
     {
         // TODO: Check for unaccepted и codepro
-        
+
         if ($this->generateHash($request) == $request->sha1_hash
             && $request->unaccepted == "false") {
 
