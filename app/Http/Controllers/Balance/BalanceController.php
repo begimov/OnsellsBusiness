@@ -7,9 +7,17 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use App\Models\Balance\Balance;
+use App\Repositories\Contracts\BalanceRepository;
 
 class BalanceController extends Controller
 {
+    protected $balanceRepository;
+    
+    public function __construct(BalanceRepository $balanceRepository)
+    {
+        $this->balanceRepository = $balanceRepository;
+    }
+
     public function index()
     {
         $prepaid_id = Auth::user()->id;
