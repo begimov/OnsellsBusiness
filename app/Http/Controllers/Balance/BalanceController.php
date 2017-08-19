@@ -39,7 +39,7 @@ class BalanceController extends Controller
 
     public function receive(Request $request)
     {
-        // TODO: Check for unaccepted и codepro
+        // TODO: Check for unaccepted и codepro 
 
         if ($this->generateHash($request) == $request->sha1_hash
             && $request->unaccepted == "false") {
