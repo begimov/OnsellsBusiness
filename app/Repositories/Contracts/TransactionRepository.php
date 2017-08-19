@@ -4,5 +4,5 @@ namespace App\Repositories\Contracts;
 
 interface TransactionRepository
 {
-    public function store($balanceId);
+    public function store($balance, $amount);
 }

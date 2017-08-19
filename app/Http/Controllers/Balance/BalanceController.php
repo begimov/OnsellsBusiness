@@ -51,6 +51,8 @@ class BalanceController extends Controller
                 $balance = $this->balanceRepository->store($request->label);
             }
 
+            $this->transactionRepository->store($balance, $request->amount);
+
             $balance->amount += $request->amount;
             $balance->save();
 
