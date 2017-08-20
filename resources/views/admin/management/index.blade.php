@@ -4,14 +4,17 @@
   <div class="container">
 
     <div class="row text-center">
-      <div class="col-md-4 col-sm-4">
+      <div class="col-md-3 col-sm-3">
         <h2><small>Бизнесов: </small>{{ $stats['businessesCount'] }}</h2>
       </div>
-      <div class="col-md-4 col-sm-4">
+      <div class="col-md-3 col-sm-3">
         <h2><small>Акций: </small>{{ $stats['promotionsCount'] }}</h2>
       </div>
-      <div class="col-md-4 col-sm-4">
+      <div class="col-md-3 col-sm-3">
         <h2><small>Пользователей: </small>{{ $stats['usersCount'] }}</h2>
+      </div>
+      <div class="col-md-3 col-sm-3">
+        <h2><small>На балансах: </small>{{ $stats['balancesTotal'] }}</h2>
       </div>
     </div>
 
