@@ -15,7 +15,7 @@ class ManagementController extends Controller
     {
         $stats = $this->getStats();
 
-        $businesses = $this->sortIndexData($request, Business::with(['promotions']))->paginate(50)
+        $businesses = $this->sortIndexData($request, Business::with(['promotions', 'balance']))->paginate(50)
             ->appends([
                 'sortPromotionsOrder' => $request->sortPromotionsOrder,
                 'sortDateOrder' => $request->sortDateOrder

@@ -43,6 +43,7 @@
                     </a>
                   </th>
                   <th>Заявок</th>
+                  <th>Баланс</th>
                 </tr>
               </thead>
               <tbody>
@@ -53,6 +54,7 @@
                     <td>{{ $business->created_at->format('d/m/y') }}</td>
                     <td>{{ count($business->promotions) }}</td>
                     <td>-</td>
+                    <td>{{ $business->balance->amount }}</td>
                   </tr>
                 @endforeach
               </tbody>
