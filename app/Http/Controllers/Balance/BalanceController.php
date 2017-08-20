@@ -41,9 +41,9 @@ class BalanceController extends Controller
             // TODO: Job, qeue send notification -> email
             $balance = $this->balanceRepository->findByUserId($request->label);
 
-            $this->transactionRepository->store($balance, $request->amount);
+            $this->transactionRepository->store($balance, $request->withdraw_amount);
 
-            $balance->amount += $request->amount;
+            $balance->amount += $request->withdraw_amount;
             $balance->save();
 
             return response()->json(['status' => 'OK']);
