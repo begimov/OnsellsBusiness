@@ -34,10 +34,9 @@ class BalanceController extends Controller
 
     public function receive(Request $request)
     {
-        // TODO: Check for unaccepted и codepro
-
         if ($this->generateHash($request) == $request->sha1_hash
-            && $request->unaccepted == "false") {
+            && $request->unaccepted == "false"
+            && $request->codepro != "true") {
 
             // TODO: Job, qeue send notification -> email
             $balance = $this->balanceRepository->findByUserId($request->label);

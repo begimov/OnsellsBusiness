@@ -11,8 +11,8 @@ class EloquentTransactionRepository implements TransactionRepository
         $transaction = new Transaction;
         $transaction->amount = $amount;
 
-        $balance->$transations()->save($transaction);
+        $balance->transactions()->save($transaction);
 
-        return $transation;
+        return $transaction;
     }
 }
