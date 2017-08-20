@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('titleandmetatags')
+  @include('layouts.partials._metatags')
+@endsection
+
 @section('head-scripts')
 <!-- Google ReCaptcha -->
 <script src='https://www.google.com/recaptcha/api.js'></script>
