@@ -16,3 +16,8 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// Payments, balance and finances
+Route::group(['prefix' => 'balance', 'namespace' => 'Balance'], function () {
+    Route::post('/', 'BalanceController@receive');
+});
