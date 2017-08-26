@@ -40,15 +40,14 @@ class HomeController extends Controller
             ->with(['user' => function($query)
                 { $query->select('id','name','email'); }, 'promotion'])
             ->take(10)
-            ->get()
-            ->toArray();
+            ->get();
 
         $applications = array_map(function ($application) {
             if (!$application['paid']) {
                 $application['user']['email'] = '';
             }
             return $application;
-        }, $applications);
+        }, $applications->toArray());
 
         $viewsData = $googleanalytics->getPromotionsViewsReport($allPromotions);
 

@@ -1676,17 +1676,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      apps: {}
+      apps: {},
+      selectedApps: []
     };
   },
 
   props: ['applications'],
+  methods: {
+    openUser: function openUser() {
+      console.log('OPEN');
+    },
+    submitSelectedApps: function submitSelectedApps() {
+      console.log(this.selectedApps);
+    },
+    selectAll: function selectAll() {
+      console.log('SELECT ALL');
+    }
+  },
   mounted: function mounted() {
     this.apps = JSON.parse(this.applications);
   }
@@ -31764,17 +31774,72 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "col-md-12"
   }, [(_vm.apps.length) ? _c('table', {
     staticClass: "table table-striped"
-  }, [_vm._m(0), _vm._v(" "), _c('tbody', [_vm._l((_vm.apps), function(application) {
-    return [_c('tr', [_c('td', [_vm._v(_vm._s(application.user.name))]), _vm._v(" "), _c('td', [(application.user.email) ? _c('p', [_vm._v(_vm._s(application.user.email))]) : _c('p', [_c('a', {
-      staticClass: "btn btn-primary btn-xs",
+  }, [_c('thead', [_c('tr', [_c('th', [_c('input', {
+    attrs: {
+      "type": "checkbox",
+      "value": ""
+    },
+    on: {
+      "change": _vm.selectAll
+    }
+  })]), _vm._v(" "), _c('th', [_vm._v("Имя")]), _vm._v(" "), _c('th', [_vm._v("Email")]), _vm._v(" "), _c('th', [_vm._v("Дата")])])]), _vm._v(" "), _c('tbody', [_vm._l((_vm.apps), function(application) {
+    return [_c('tr', [_c('td', [_c('input', {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
+        value: (_vm.selectedApps),
+        expression: "selectedApps"
+      }],
+      attrs: {
+        "type": "checkbox"
+      },
+      domProps: {
+        "value": application.id,
+        "checked": Array.isArray(_vm.selectedApps) ? _vm._i(_vm.selectedApps, application.id) > -1 : (_vm.selectedApps)
+      },
+      on: {
+        "__c": function($event) {
+          var $$a = _vm.selectedApps,
+            $$el = $event.target,
+            $$c = $$el.checked ? (true) : (false);
+          if (Array.isArray($$a)) {
+            var $$v = application.id,
+              $$i = _vm._i($$a, $$v);
+            if ($$el.checked) {
+              $$i < 0 && (_vm.selectedApps = $$a.concat($$v))
+            } else {
+              $$i > -1 && (_vm.selectedApps = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+            }
+          } else {
+            _vm.selectedApps = $$c
+          }
+        }
+      }
+    })]), _vm._v(" "), _c('td', [_vm._v(_vm._s(application.user.name))]), _vm._v(" "), _c('td', [(application.user.email) ? _c('p', [_vm._v(_vm._s(application.user.email))]) : _c('p', [_c('a', {
+      staticClass: "btn btn-default btn-xs",
       attrs: {
         "href": "#"
+      },
+      on: {
+        "click": function($event) {
+          $event.preventDefault();
+          _vm.openUser($event)
+        }
       }
-    }, [_vm._v("Открыть")])])]), _vm._v(" "), _c('td', [_vm._v(_vm._s(application.created_at))])])]
-  })], 2)]) : _c('p', [_vm._v("Пока новых заявок нет.")])])])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('thead', [_c('tr', [_c('th', [_vm._v("Имя")]), _vm._v(" "), _c('th', [_vm._v("Email")]), _vm._v(" "), _c('th', [_vm._v("Дата")])])])
-}]}
+    }, [_vm._v("Открыть контакт")])])]), _vm._v(" "), _c('td', [_vm._v(_vm._s(application.created_at))])])]
+  })], 2)]) : _c('p', [_vm._v("Пока новых заявок нет.")]), _vm._v(" "), _c('button', {
+    staticClass: "btn btn-primary",
+    attrs: {
+      "type": "submit"
+    },
+    on: {
+      "click": function($event) {
+        if (!('button' in $event) && _vm._k($event.keyCode, "submit")) { return null; }
+        _vm.submitSelectedApps($event)
+      }
+    }
+  }, [_vm._v("Открыть выбранные")])])])
+},staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
