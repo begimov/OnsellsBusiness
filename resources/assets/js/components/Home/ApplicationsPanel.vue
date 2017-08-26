@@ -11,11 +11,11 @@
         </thead>
         <tbody>
           <template v-for="application in apps">
-            <tr>
+            <!-- <tr>
               <td colspan="3">
                 <strong>&laquo;{{ application.promotion.promotionname }}&raquo;</strong>
               </td>
-            </tr>
+            </tr> -->
             <tr>
               <td>{{ application.user.name }}</td>
               <td>{{ application.user.email }}</td>
