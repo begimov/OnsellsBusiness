@@ -1719,9 +1719,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }
   },
   methods: {
-    openApp: function openApp(id) {
-      console.log(id);
-    },
     openSelectedApps: function openSelectedApps() {
       console.log(this.selectedApps);
     }
@@ -31837,18 +31834,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           }
         }
       }
-    })]), _vm._v(" "), _c('td', [_vm._v(_vm._s(application.user.name))]), _vm._v(" "), _c('td', [(application.user.email) ? _c('p', [_vm._v(_vm._s(application.user.email))]) : _c('p', [_c('a', {
-      staticClass: "btn btn-default btn-xs",
-      attrs: {
-        "href": "#"
-      },
-      on: {
-        "click": function($event) {
-          $event.preventDefault();
-          _vm.openApp(application.id)
-        }
-      }
-    }, [_vm._v("Открыть контакт")])])]), _vm._v(" "), _c('td', [_vm._v(_vm._s(application.created_at))])])]
+    })]), _vm._v(" "), _c('td', [_vm._v(_vm._s(application.user.name))]), _vm._v(" "), _c('td', [(application.user.email) ? _c('p', [_vm._v(_vm._s(application.user.email))]) : _c('p', [_vm._v(_vm._s(new Array(Math.floor(Math.random() * 10 + 10) + 1).join('*')))])]), _vm._v(" "), _c('td', [_vm._v(_vm._s(application.created_at))])])]
   })], 2)]) : _c('p', [_vm._v("Пока новых заявок нет.")]), _vm._v(" "), (_vm.order) ? _c('div', [_c('div', {
     staticClass: "row"
   }, [_c('div', {

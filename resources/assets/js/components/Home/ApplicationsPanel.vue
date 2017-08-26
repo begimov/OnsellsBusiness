@@ -17,7 +17,7 @@
               <td>{{ application.user.name }}</td>
               <td>
                 <p v-if="application.user.email">{{ application.user.email }}</p>
-                <p v-else><a href="#" class="btn btn-default btn-xs" @click.prevent="openApp(application.id)">Открыть контакт</a></p>
+                <p v-else>{{ new Array(Math.floor(Math.random() * 10 + 10) + 1).join('*') }}</p>
               </td>
               <td>{{ application.created_at }}</td>
             </tr>
@@ -72,9 +72,6 @@ export default {
     }
   },
   methods: {
-    openApp(id) {
-      console.log(id)
-    },
     openSelectedApps() {
       console.log(this.selectedApps)
     }
