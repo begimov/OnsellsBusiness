@@ -34,8 +34,10 @@
             <table class="table table-hover table-condensed">
               <thead>
                 <tr>
-                  <th>Имя</th>
+                  <th>Название</th>
                   <th>Email</th>
+                  <th>Телефон</th>
+                  <th>Категория</th>
                   <th>
                     <a href="{{ route('management.index', ['sortDateOrder' => $nextSortDateOrder]) }}">
                       Дата
@@ -55,6 +57,8 @@
                   <tr>
                     <td>{{ $business->name }}</td>
                     <td><a href="mailto:{{ $business->email }}">{{ $business->email }}</a></td>
+                    <td>{{ count($business->promotions) > 0 ? $business->promotions[0]->phone : '-' }}</td>
+                    <td>{{ count($business->promotions) > 0 ? $business->promotions[0]->category->name : '-' }}</td>
                     <td>{{ $business->created_at->format('d/m/y') }}</td>
                     <td>{{ count($business->promotions) }}</td>
                     <td>-</td>

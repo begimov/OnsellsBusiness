@@ -19,7 +19,9 @@
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
-                &nbsp;
+              @if (Auth::check())
+                <li><a href="{{ route('home') }}">Акции</a></li>
+              @endif
             </ul>
 
             <!-- Right Side Of Navbar -->
@@ -33,7 +35,7 @@
                     <li><a href="{{ route('management.index') }}">Управление</a></li>
                     <li><a href="{{ route('moderation.index') }}">Модерация</a></li>
                 @endrole
-                    <li><a href="{{ route('payments.index') }}">Оплата</a></li>
+                    <li><a href="{{ route('payments.index') }}">Баланс</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                             {{ Auth::user()->name }} <span class="caret"></span>
