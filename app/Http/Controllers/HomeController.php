@@ -37,9 +37,18 @@ class HomeController extends Controller
             ->paginate(5);
 
         $applications = $user->applications()
-            ->with(['user', 'promotion'])
+            ->with(['user' => function($query)
+                { $query->select('id','name','email'); }, 'promotion'])
             ->take(10)
-            ->get();
+            ->get()
+            ->toArray();
+
+        $applications = array_map(function ($application) {
+            if (!$application['paid']) {
+                $application['user']['email'] = '';
+            }
+            return $application;
+        }, $applications);
 
         $viewsData = $googleanalytics->getPromotionsViewsReport($allPromotions);
 

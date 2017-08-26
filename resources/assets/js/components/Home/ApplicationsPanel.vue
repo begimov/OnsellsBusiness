@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <div class="col-md-12">
-      <table class="table table-striped">
+      <table class="table table-striped" v-if="apps.length">
         <thead>
           <tr>
             <th>Имя</th>
@@ -18,12 +18,16 @@
             </tr> -->
             <tr>
               <td>{{ application.user.name }}</td>
-              <td>{{ application.user.email }}</td>
+              <td>
+                <p v-if="application.user.email">{{ application.user.email }}</p>
+                <p v-else><a href="#" class="btn btn-primary btn-xs">Открыть</a></p>
+              </td>
               <td>{{ application.created_at }}</td>
             </tr>
           </template>
         </tbody>
       </table>
+      <p v-else>Пока новых заявок нет.</p>
     </div>
   </div>
 </template>

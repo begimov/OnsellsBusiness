@@ -1674,6 +1674,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -31758,11 +31762,16 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "row"
   }, [_c('div', {
     staticClass: "col-md-12"
-  }, [_c('table', {
+  }, [(_vm.apps.length) ? _c('table', {
     staticClass: "table table-striped"
   }, [_vm._m(0), _vm._v(" "), _c('tbody', [_vm._l((_vm.apps), function(application) {
-    return [_c('tr', [_c('td', [_vm._v(_vm._s(application.user.name))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(application.user.email))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(application.created_at))])])]
-  })], 2)])])])
+    return [_c('tr', [_c('td', [_vm._v(_vm._s(application.user.name))]), _vm._v(" "), _c('td', [(application.user.email) ? _c('p', [_vm._v(_vm._s(application.user.email))]) : _c('p', [_c('a', {
+      staticClass: "btn btn-primary btn-xs",
+      attrs: {
+        "href": "#"
+      }
+    }, [_vm._v("Открыть")])])]), _vm._v(" "), _c('td', [_vm._v(_vm._s(application.created_at))])])]
+  })], 2)]) : _c('p', [_vm._v("Пока новых заявок нет.")])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('thead', [_c('tr', [_c('th', [_vm._v("Имя")]), _vm._v(" "), _c('th', [_vm._v("Email")]), _vm._v(" "), _c('th', [_vm._v("Дата")])])])
 }]}
