@@ -1694,6 +1694,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -1704,7 +1706,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     };
   },
 
-  props: ['applications', 'balance'],
+  props: ['applications', 'balance', 'balanceroute'],
   computed: {
     order: function order() {
       return this.selectedApps.length;
@@ -31861,9 +31863,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "panel-footer text-center"
   }, [_c('h4', [_c('span', {
     staticClass: "label label-primary"
-  }, [_vm._v("Остаток: " + _vm._s(_vm.balanceAmount - _vm.orderPrice) + " руб.")])]), _vm._v(" "), (_vm.balanceAmount - _vm.orderPrice < 0) ? _c('p', [_c('span', {
-    staticClass: "label label-danger"
-  }, [_vm._v("Необходимо пополнить баланс")])]) : _vm._e()])])])]) : _vm._e(), _vm._v(" "), _c('button', {
+  }, [_vm._v("Остаток: " + _vm._s(_vm.balanceAmount - _vm.orderPrice) + " руб.")])]), _vm._v(" "), (_vm.balanceAmount - _vm.orderPrice < 0) ? _c('p', [_vm._v("\n              Необходимо "), _c('a', {
+    attrs: {
+      "href": this.balanceroute
+    }
+  }, [_vm._v("пополнить баланс")])]) : _vm._e()])])])]) : _vm._e(), _vm._v(" "), _c('button', {
     staticClass: "btn btn-primary",
     attrs: {
       "type": "submit",

@@ -38,7 +38,9 @@
             </div>
             <div class="panel-footer text-center">
               <h4><span class="label label-primary">Остаток: {{ balanceAmount - orderPrice }} руб.</span></h4>
-              <p v-if="balanceAmount - orderPrice < 0"><span class="label label-danger">Необходимо пополнить баланс</span></p>
+              <p v-if="balanceAmount - orderPrice < 0">
+                Необходимо <a :href="this.balanceroute">пополнить баланс</a>
+              </p>
             </div>
           </div>
         </div>
@@ -57,7 +59,7 @@ export default {
       balanceAmount: 0
     }
   },
-  props: ['applications', 'balance'],
+  props: ['applications', 'balance', 'balanceroute'],
   computed: {
     order() {
       return this.selectedApps.length
