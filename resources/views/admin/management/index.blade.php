@@ -57,8 +57,8 @@
                   <tr>
                     <td>{{ $business->name }}</td>
                     <td><a href="mailto:{{ $business->email }}">{{ $business->email }}</a></td>
-                    <td>999 999 999</td>
-                    <td>-</td>
+                    <td>{{ count($business->promotions) > 0 ? $business->promotions[0]->phone : '-' }}</td>
+                    <td>{{ count($business->promotions) > 0 ? $business->promotions[0]->category->name : '-' }}</td>
                     <td>{{ $business->created_at->format('d/m/y') }}</td>
                     <td>{{ count($business->promotions) }}</td>
                     <td>-</td>
