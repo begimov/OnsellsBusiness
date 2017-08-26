@@ -30,6 +30,8 @@ class HomeController extends Controller
         $allPromotions = $user->promotions()->get();
         $promocount = $allPromotions->count();
 
+        $balance = $user->balance;
+
         $promotions = $user->promotions()
             ->with('images')
             ->with('smallImage')
@@ -51,6 +53,6 @@ class HomeController extends Controller
 
         $viewsData = $googleanalytics->getPromotionsViewsReport($allPromotions);
 
-        return view('home', compact('promotions', 'promocount', 'viewsData', 'applications'));
+        return view('home', compact('promotions', 'promocount', 'viewsData', 'applications', 'balance'));
     }
 }

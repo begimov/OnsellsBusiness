@@ -1676,29 +1676,57 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      apps: {},
-      selectedApps: []
+      apps: [],
+      selectedApps: [],
+      balanceAmount: 0
     };
   },
 
-  props: ['applications'],
+  props: ['applications', 'balance'],
+  computed: {
+    order: function order() {
+      return this.selectedApps.length;
+    },
+    orderPrice: function orderPrice() {
+      return this.selectedApps.length * 100;
+    },
+    disabledBtn: function disabledBtn() {
+      return this.selectedApps.length == 0 || this.balanceAmount - this.orderPrice < 0;
+    }
+  },
   methods: {
-    openUser: function openUser() {
-      console.log('OPEN');
+    openApp: function openApp(id) {
+      console.log(id);
     },
-    submitSelectedApps: function submitSelectedApps() {
+    openSelectedApps: function openSelectedApps() {
       console.log(this.selectedApps);
-    },
-    selectAll: function selectAll() {
-      console.log('SELECT ALL');
     }
   },
   mounted: function mounted() {
     this.apps = JSON.parse(this.applications);
+    this.balanceAmount = JSON.parse(this.balance).amount;
   }
 });
 
@@ -31774,15 +31802,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "col-md-12"
   }, [(_vm.apps.length) ? _c('table', {
     staticClass: "table table-striped"
-  }, [_c('thead', [_c('tr', [_c('th', [_c('input', {
-    attrs: {
-      "type": "checkbox",
-      "value": ""
-    },
-    on: {
-      "change": _vm.selectAll
-    }
-  })]), _vm._v(" "), _c('th', [_vm._v("Имя")]), _vm._v(" "), _c('th', [_vm._v("Email")]), _vm._v(" "), _c('th', [_vm._v("Дата")])])]), _vm._v(" "), _c('tbody', [_vm._l((_vm.apps), function(application) {
+  }, [_vm._m(0), _vm._v(" "), _c('tbody', [_vm._l((_vm.apps), function(application) {
     return [_c('tr', [_c('td', [_c('input', {
       directives: [{
         name: "model",
@@ -31823,23 +31843,50 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       on: {
         "click": function($event) {
           $event.preventDefault();
-          _vm.openUser($event)
+          _vm.openApp(application.id)
         }
       }
     }, [_vm._v("Открыть контакт")])])]), _vm._v(" "), _c('td', [_vm._v(_vm._s(application.created_at))])])]
-  })], 2)]) : _c('p', [_vm._v("Пока новых заявок нет.")]), _vm._v(" "), _c('button', {
+  })], 2)]) : _c('p', [_vm._v("Пока новых заявок нет.")]), _vm._v(" "), (_vm.order) ? _c('div', [_c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "panel panel-default"
+  }, [_c('div', {
+    staticClass: "panel-body"
+  }, [_c('div', {
+    staticClass: "col-md-6"
+  }, [_c('p'), _vm._m(1), _vm._v(" " + _vm._s(_vm.orderPrice) + " руб."), _c('p')]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-6"
+  }, [_c('p'), _vm._m(2), _vm._v(" " + _vm._s(_vm.balanceAmount) + " руб."), _c('p')])]), _vm._v(" "), _c('div', {
+    staticClass: "panel-footer text-center"
+  }, [_c('h4', [_c('span', {
+    staticClass: "label label-primary"
+  }, [_vm._v("Остаток: " + _vm._s(_vm.balanceAmount - _vm.orderPrice) + " руб.")])]), _vm._v(" "), (_vm.balanceAmount - _vm.orderPrice < 0) ? _c('p', [_c('span', {
+    staticClass: "label label-danger"
+  }, [_vm._v("Необходимо пополнить баланс")])]) : _vm._e()])])])]) : _vm._e(), _vm._v(" "), _c('button', {
     staticClass: "btn btn-primary",
     attrs: {
-      "type": "submit"
+      "type": "submit",
+      "disabled": _vm.disabledBtn
     },
     on: {
       "click": function($event) {
         if (!('button' in $event) && _vm._k($event.keyCode, "submit")) { return null; }
-        _vm.submitSelectedApps($event)
+        _vm.openSelectedApps($event)
       }
     }
   }, [_vm._v("Открыть выбранные")])])])
-},staticRenderFns: []}
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('thead', [_c('tr', [_c('th'), _vm._v(" "), _c('th', [_vm._v("Имя")]), _vm._v(" "), _c('th', [_vm._v("Email")]), _vm._v(" "), _c('th', [_vm._v("Дата")])])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('h4', [_c('span', {
+    staticClass: "label label-default"
+  }, [_vm._v("Стоимость:")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('h4', [_c('span', {
+    staticClass: "label label-default"
+  }, [_vm._v("Доступно:")])])
+}]}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
