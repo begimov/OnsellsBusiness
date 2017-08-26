@@ -84,7 +84,7 @@
       <div class="panel panel-default">
         <div class="panel-heading">Последние заявки от клиентов</div>
         <div class="panel-body">
-          <applications-panel applications="{{ json_encode($applications) }}"></applications-panel>
+          <applications-panel applications="{{ $applications }}"></applications-panel>
         </div>
       </div>
     </div>
