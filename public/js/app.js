@@ -1696,6 +1696,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -1706,7 +1711,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     };
   },
 
-  props: ['applications', 'balance', 'balanceroute'],
+  props: ['applications', 'balance', 'balanceroute', 'checkoutroute'],
   computed: {
     order: function order() {
       return this.selectedApps.length;
@@ -1720,7 +1725,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   methods: {
     openSelectedApps: function openSelectedApps() {
-      console.log(this.selectedApps);
+      axios.post(this.checkoutroute, {
+        applications: this.selectedApps
+      }).then(function (response) {
+        console.log(response);
+      }).catch(function (error) {
+        console.log(error);
+      });
     }
   },
   mounted: function mounted() {
@@ -31799,6 +31810,17 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "row"
   }, [_c('div', {
     staticClass: "col-md-12"
+  }, [_c('form', {
+    attrs: {
+      "action": "#",
+      "method": "post"
+    },
+    on: {
+      "submit": function($event) {
+        $event.preventDefault();
+        _vm.openSelectedApps($event)
+      }
+    }
   }, [(_vm.apps.length) ? _c('table', {
     staticClass: "table table-striped"
   }, [_vm._m(0), _vm._v(" "), _c('tbody', [_vm._l((_vm.apps), function(application) {
@@ -31849,7 +31871,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "panel-footer text-center"
   }, [_c('h4', [_c('span', {
     staticClass: "label label-primary"
-  }, [_vm._v("Остаток: " + _vm._s(_vm.balanceAmount - _vm.orderPrice) + " руб.")])]), _vm._v(" "), (_vm.balanceAmount - _vm.orderPrice < 0) ? _c('p', [_vm._v("\n              Необходимо "), _c('a', {
+  }, [_vm._v("Остаток: " + _vm._s(_vm.balanceAmount - _vm.orderPrice) + " руб.")])]), _vm._v(" "), (_vm.balanceAmount - _vm.orderPrice < 0) ? _c('p', [_vm._v("\n                Необходимо "), _c('a', {
     attrs: {
       "href": this.balanceroute
     }
@@ -31858,14 +31880,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "type": "submit",
       "disabled": _vm.disabledBtn
-    },
-    on: {
-      "click": function($event) {
-        if (!('button' in $event) && _vm._k($event.keyCode, "submit")) { return null; }
-        _vm.openSelectedApps($event)
-      }
     }
-  }, [_vm._v("Открыть выбранные")])])])
+  }, [_vm._v("Открыть выбранные")])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('thead', [_c('tr', [_c('th'), _vm._v(" "), _c('th', [_vm._v("Имя")]), _vm._v(" "), _c('th', [_vm._v("Email")]), _vm._v(" "), _c('th', [_vm._v("Дата")])])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;

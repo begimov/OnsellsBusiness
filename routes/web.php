@@ -46,6 +46,11 @@ Route::group(['middleware' => 'auth', 'prefix' => 'balance', 'namespace' => 'Bal
     Route::get('/', 'BalanceController@index')->name('payments.index');
 });
 
+// WebAPI
+Route::group(['prefix' => 'webapi', 'namespace' => 'Webapi'], function () {
+  Route::post('/checkout', 'CheckoutController@checkout')->name('checkout');
+});
+
 // External redirects
 Route::get('/redirect/{promotion}', function (App\Models\Promotions\Promotion $promotion) {
   $url = $promotion->website;

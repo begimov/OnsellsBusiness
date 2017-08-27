@@ -84,7 +84,10 @@
       <div class="panel panel-default">
         <div class="panel-heading">Последние заявки от клиентов</div>
         <div class="panel-body">
-          <applications-panel applications="{{ json_encode($applications) }}" balance="{{ $balance }}" balanceroute="{{ route('payments.index') }}"></applications-panel>
+          <applications-panel applications="{{ json_encode($applications) }}"
+              balance="{{ $balance }}"
+              balanceroute="{{ route('payments.index') }}"
+              checkoutroute=" {{ route('checkout') }} "></applications-panel>
         </div>
       </div>
     </div>
