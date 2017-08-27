@@ -15,7 +15,7 @@
           <tbody>
             <template v-for="application in apps">
               <tr>
-                <td><input type="checkbox" :value="application.id" v-model="selectedApps"></td>
+                <td><input type="checkbox" :value="application.id" v-if="!application.paid" v-model="selectedApps"></td>
                 <td>{{ application.user.name }}</td>
                 <td>
                   <p v-if="application.user.email">{{ application.user.email }}</p>

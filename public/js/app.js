@@ -31825,7 +31825,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [(_vm.apps.length) ? _c('table', {
     staticClass: "table table-striped"
   }, [_vm._m(0), _vm._v(" "), _c('tbody', [_vm._l((_vm.apps), function(application) {
-    return [_c('tr', [_c('td', [_c('input', {
+    return [_c('tr', [_c('td', [(!application.paid) ? _c('input', {
       directives: [{
         name: "model",
         rawName: "v-model",
@@ -31857,7 +31857,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           }
         }
       }
-    })]), _vm._v(" "), _c('td', [_vm._v(_vm._s(application.user.name))]), _vm._v(" "), _c('td', [(application.user.email) ? _c('p', [_vm._v(_vm._s(application.user.email))]) : _c('p', [_vm._v(_vm._s(new Array(Math.floor(Math.random() * 10 + 10) + 1).join('*')))])]), _vm._v(" "), _c('td', [_vm._v(_vm._s(application.created_at))])])]
+    }) : _vm._e()]), _vm._v(" "), _c('td', [_vm._v(_vm._s(application.user.name))]), _vm._v(" "), _c('td', [(application.user.email) ? _c('p', [_vm._v(_vm._s(application.user.email))]) : _c('p', [_vm._v(_vm._s(new Array(Math.floor(Math.random() * 10 + 10) + 1).join('*')))])]), _vm._v(" "), _c('td', [_vm._v(_vm._s(application.created_at))])])]
   })], 2)]) : _c('p', [_vm._v("Пока новых заявок нет.")]), _vm._v(" "), (_vm.order) ? _c('div', [_c('div', {
     staticClass: "row"
   }, [_c('div', {
