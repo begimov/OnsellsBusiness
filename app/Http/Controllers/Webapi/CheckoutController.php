@@ -9,6 +9,16 @@ class CheckoutController extends Controller
 {
     public function checkout(Request $request)
     {
-        dd($request->all());
+        // validation of appplications array
+
+        $user = $request->user();
+
+        // check if all recieved app ids belongs to $user's owned promotions
+
+        // check if balance amount is enough to pay
+
+        // touch all recieved apps with paid = 1
+
+        // response with status => 'OK'
     }
 }

@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <div class="col-md-12">
-      
+
       <form action="#" method="post" @submit.prevent="openSelectedApps">
         <table class="table table-striped" v-if="apps.length">
           <thead>
@@ -64,13 +64,19 @@ export default {
       balanceAmount: 0
     }
   },
-  props: ['applications', 'balance', 'balanceroute', 'checkoutroute'],
+  props: [
+    'applications',
+    'balance',
+    'appbaseprice',
+    'balanceroute',
+    'checkoutroute'],
+
   computed: {
     order() {
       return this.selectedApps.length
     },
     orderPrice() {
-      return this.selectedApps.length * 100
+      return this.selectedApps.length * this.appbaseprice
     },
     disabledBtn() {
       return this.selectedApps.length == 0 || this.balanceAmount - this.orderPrice < 0

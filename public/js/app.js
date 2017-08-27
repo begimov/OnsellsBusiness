@@ -1711,13 +1711,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     };
   },
 
-  props: ['applications', 'balance', 'balanceroute', 'checkoutroute'],
+  props: ['applications', 'balance', 'appbaseprice', 'balanceroute', 'checkoutroute'],
+
   computed: {
     order: function order() {
       return this.selectedApps.length;
     },
     orderPrice: function orderPrice() {
-      return this.selectedApps.length * 100;
+      return this.selectedApps.length * this.appbaseprice;
     },
     disabledBtn: function disabledBtn() {
       return this.selectedApps.length == 0 || this.balanceAmount - this.orderPrice < 0;
