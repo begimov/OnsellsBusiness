@@ -47,7 +47,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'balance', 'namespace' => 'Bal
 });
 
 // WebAPI
-Route::group(['prefix' => 'webapi', 'namespace' => 'Webapi'], function () {
+Route::group(['middleware' => 'auth', 'prefix' => 'webapi', 'namespace' => 'Webapi'], function () {
   Route::post('/checkout', 'CheckoutController@checkout')->name('checkout');
 });
 
