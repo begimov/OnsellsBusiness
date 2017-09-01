@@ -48,7 +48,7 @@
             </div>
           </div>
         </div>
-        <button type="submit" class="btn btn-primary" :disabled="disabledBtn">Открыть выбранные</button>
+        <button type="submit" class="btn btn-primary">Открыть выбранные</button>
       </form>
 
     </div>
@@ -59,9 +59,9 @@
 export default {
   data() {
     return {
-      apps: [],
+      apps: JSON.parse(this.applications),
       selectedApps: [],
-      balanceAmount: 0
+      balanceAmount: JSON.parse(this.balance).amount
     }
   },
   props: [
@@ -87,17 +87,18 @@ export default {
       axios.post(this.checkoutroute, {
         applications: this.selectedApps
       })
-      .then(function (response) {
-        console.log(response);
+      .then((response) => {
+        this.apps = response.data.data.applications
+        this.balanceAmount = response.data.data.balance.amount
+        this.selectedApps = []
       })
       .catch(function (error) {
-        console.log(error);
+        //
       })
     }
   },
   mounted() {
-    this.apps = JSON.parse(this.applications)
-    this.balanceAmount = JSON.parse(this.balance).amount
+    //
   }
 }
 </script>

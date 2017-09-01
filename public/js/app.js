@@ -1705,9 +1705,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      apps: [],
+      apps: JSON.parse(this.applications),
       selectedApps: [],
-      balanceAmount: 0
+      balanceAmount: JSON.parse(this.balance).amount
     };
   },
 
@@ -1726,18 +1726,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   methods: {
     openSelectedApps: function openSelectedApps() {
+      var _this = this;
+
       axios.post(this.checkoutroute, {
         applications: this.selectedApps
       }).then(function (response) {
-        console.log(response);
+        _this.apps = response.data.data.applications;
+        _this.balanceAmount = response.data.data.balance.amount;
+        _this.selectedApps = [];
       }).catch(function (error) {
-        console.log(error);
+        //
       });
     }
   },
   mounted: function mounted() {
-    this.apps = JSON.parse(this.applications);
-    this.balanceAmount = JSON.parse(this.balance).amount;
+    //
   }
 });
 
@@ -31879,8 +31882,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v("пополнить баланс")])]) : _vm._e()])])])]) : _vm._e(), _vm._v(" "), _c('button', {
     staticClass: "btn btn-primary",
     attrs: {
-      "type": "submit",
-      "disabled": _vm.disabledBtn
+      "type": "submit"
     }
   }, [_vm._v("Открыть выбранные")])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
