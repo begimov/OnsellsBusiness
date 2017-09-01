@@ -48,7 +48,7 @@
             </div>
           </div>
         </div>
-        <button type="submit" class="btn btn-primary">Открыть выбранные</button>
+        <button type="submit" class="btn btn-primary" :disabled="disabledBtn">Открыть выбранные</button>
       </form>
 
     </div>

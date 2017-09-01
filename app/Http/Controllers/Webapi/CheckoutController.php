@@ -44,6 +44,13 @@ class CheckoutController extends Controller
                 { $query->select('id','name','email'); }, 'promotion'])
             ->take(10)
             ->get();
+            
+        $applications = array_map(function ($application) {
+            if (!$application['paid']) {
+                $application['user']['email'] = '';
+            }
+            return $application;
+        }, $applications->toArray());
 
         $balance = $user->balance;
 
