@@ -4,5 +4,5 @@ namespace App\Repositories\Contracts;
 
 interface ApplicationRepository
 {
-    public function getApplicationsHideUnpaid($business);
+    public function getApplicationsHideUnpaid($user, $num);
 }

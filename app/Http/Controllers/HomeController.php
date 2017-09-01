@@ -5,17 +5,20 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Classes\Analytics\GoogleAnalytics;
+use App\Repositories\Contracts\ApplicationRepository;
 
 class HomeController extends Controller
 {
+    protected $applicationRepository;
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(ApplicationRepository $applicationRepository)
     {
         $this->middleware('auth');
+        $this->applicationRepository = $applicationRepository;
     }
 
     /**
@@ -38,18 +41,7 @@ class HomeController extends Controller
             ->with('category')
             ->paginate(5);
 
-        $applications = $user->applications()
-            ->with(['user' => function($query)
-                { $query->select('id','name','email'); }, 'promotion'])
-            ->take(10)
-            ->get();
-
-        $applications = array_map(function ($application) {
-            if (!$application['paid']) {
-                $application['user']['email'] = '';
-            }
-            return $application;
-        }, $applications->toArray());
+        $applications = $this->applicationRepository->getApplicationsHideUnpaid($user, 10);
 
         $viewsData = $googleanalytics->getPromotionsViewsReport($allPromotions);
 

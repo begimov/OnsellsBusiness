@@ -7,7 +7,7 @@ use App\Models\Balance\Balance;
 
 class EloquentApplicationRepository implements ApplicationRepository
 {
-    public function getApplicationsHideUnpaid($business, $num) {
+    public function getApplicationsHideUnpaid($user, $num) {
         $applications = $user->applications()
             ->with(['user' => function($query)
                 { $query->select('id','name','email'); }, 'promotion'])
