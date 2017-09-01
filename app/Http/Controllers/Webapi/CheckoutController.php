@@ -25,27 +25,29 @@ class CheckoutController extends Controller
         //TODO: validation of appplications array using FormRequest
 
         $user = $request->user();
+
         $applicationIds = $request->all()['applications'];
 
         $applications = Application::with(['user'])
-            ->whereIn('id', $applicationIds);
+            ->whereIn('id', $applicationIds)
+            ->whereNull('paid');
+
+        $appsCount = $applications->count();
 
         //TODO: check if all recieved app ids belongs to $user's owned promotions
         // POLICY???
 
-        // filter out paid apps
-
-        if (!$this->isBalanceSufficient($applications->count(), $user->balance->amount)) {
+        if (!$this->isBalanceSufficient($appsCount, $user->balance->amount)) {
             return response()->json([
                     'status' => 'Insufficient balance error'
                 ]);
         }
 
-        $this->updateAppsAndBalance($user, $applications);
+        $this->updateApplications($applications);
+
+        $balance = $this->updateBalance($user, $appsCount);
 
         $applications = $this->applicationRepository->getApplicationsHideUnpaid($user, 10);
-
-        $balance = $user->balance;
 
         return response()->json([
                 'status' => 'OK',
@@ -61,17 +63,22 @@ class CheckoutController extends Controller
         return $appsCount * config('promotions.app_base_price') <= $balanceAmount;
     }
 
-    protected function updateAppsAndBalance($user, $applications)
+    protected function updateApplications($applications)
+    {
+        $applications->update(['paid' => 1]);
+        return true;
+    }
+
+    protected function updateBalance($user, $appsCount)
     {
         $balance = $user->balance;
-
-        $applications->update(['paid' => 1]);
-
-        $totalCost = $applications->count() * config('promotions.app_base_price');
+        $totalCost = $appsCount * config('promotions.app_base_price');
 
         $this->transactionRepository->store($balance, -$totalCost);
 
         $balance->amount -= $totalCost;
         $balance->save();
+
+        return $balance;
     }
 }

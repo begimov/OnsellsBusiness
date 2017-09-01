@@ -1707,7 +1707,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     return {
       apps: JSON.parse(this.applications),
       selectedApps: [],
-      balanceAmount: JSON.parse(this.balance).amount
+      balanceAmount: JSON.parse(this.balance).amount,
+      isLoading: false
     };
   },
 
@@ -1721,21 +1722,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       return this.selectedApps.length * this.appbaseprice;
     },
     disabledBtn: function disabledBtn() {
-      return this.selectedApps.length == 0 || this.balanceAmount - this.orderPrice < 0;
+      return this.selectedApps.length == 0 || this.balanceAmount - this.orderPrice < 0 || this.isLoading;
     }
   },
   methods: {
     openSelectedApps: function openSelectedApps() {
       var _this = this;
 
+      this.isLoading = true;
       axios.post(this.checkoutroute, {
         applications: this.selectedApps
       }).then(function (response) {
         _this.apps = response.data.data.applications;
         _this.balanceAmount = response.data.data.balance.amount;
         _this.selectedApps = [];
+        _this.isLoading = false;
       }).catch(function (error) {
-        //
+        _this.isLoading = false;
       });
     }
   },

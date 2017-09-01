@@ -61,7 +61,8 @@ export default {
     return {
       apps: JSON.parse(this.applications),
       selectedApps: [],
-      balanceAmount: JSON.parse(this.balance).amount
+      balanceAmount: JSON.parse(this.balance).amount,
+      isLoading: false
     }
   },
   props: [
@@ -79,11 +80,12 @@ export default {
       return this.selectedApps.length * this.appbaseprice
     },
     disabledBtn() {
-      return this.selectedApps.length == 0 || this.balanceAmount - this.orderPrice < 0
+      return this.selectedApps.length == 0 || this.balanceAmount - this.orderPrice < 0 || this.isLoading
     }
   },
   methods: {
     openSelectedApps() {
+      this.isLoading = true;
       axios.post(this.checkoutroute, {
         applications: this.selectedApps
       })
@@ -91,9 +93,10 @@ export default {
         this.apps = response.data.data.applications
         this.balanceAmount = response.data.data.balance.amount
         this.selectedApps = []
+        this.isLoading = false
       })
-      .catch(function (error) {
-        //
+      .catch((error) => {
+        this.isLoading = false
       })
     }
   },
