@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Webapi;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Promotions\Application;
 use App\Repositories\Contracts\TransactionRepository;
 use App\Repositories\Contracts\ApplicationRepository;
 
@@ -28,9 +27,8 @@ class CheckoutController extends Controller
 
         $applicationIds = $request->all()['applications'];
 
-        $applications = Application::with(['user'])
-            ->whereIn('id', $applicationIds)
-            ->whereNull('paid');
+        $applications = $this->applicationRepository
+            ->getUnpaidApplicationsById($applicationIds);
 
         $appsCount = $applications->count();
 
