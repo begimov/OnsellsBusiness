@@ -6,14 +6,18 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Promotions\Application;
 use App\Repositories\Contracts\TransactionRepository;
+use App\Repositories\Contracts\ApplicationRepository;
 
 class CheckoutController extends Controller
 {
     protected $transactionRepository;
+    protected $applicationRepository;
 
-    public function __construct(TransactionRepository $transactionRepository)
+    public function __construct(TransactionRepository $transactionRepository,
+        ApplicationRepository $applicationRepository)
     {
         $this->transactionRepository = $transactionRepository;
+        $this->applicationRepository = $applicationRepository;
     }
 
     public function checkout(Request $request)
@@ -39,18 +43,7 @@ class CheckoutController extends Controller
 
         $this->updateAppsAndBalance($user, $applications);
 
-        $applications = $user->applications()
-            ->with(['user' => function($query)
-                { $query->select('id','name','email'); }, 'promotion'])
-            ->take(10)
-            ->get();
-            
-        $applications = array_map(function ($application) {
-            if (!$application['paid']) {
-                $application['user']['email'] = '';
-            }
-            return $application;
-        }, $applications->toArray());
+        $applications = $this->applicationRepository->getApplicationsHideUnpaid($user, 10);
 
         $balance = $user->balance;
 
