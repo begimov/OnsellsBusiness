@@ -13,7 +13,19 @@ class ValidationRulesServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Validator::extend('numeric_array', function ($attribute, $values, $parameters, $validator) {
+          if(!is_array($values)) {
+              return false;
+          }
+
+          foreach($values as $value) {
+              if(!is_numeric($value)) {
+                  return false;
+              }
+          }
+
+          return true;
+        });
     }
 
     /**

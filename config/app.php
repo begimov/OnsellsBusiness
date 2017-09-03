@@ -180,6 +180,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\RolesPermissionsServiceProvider::class,
         App\Providers\RepositoryServiceProvider::class,
+        App\Providers\ValidationRulesServiceProvider::class,
 
     ],
 
