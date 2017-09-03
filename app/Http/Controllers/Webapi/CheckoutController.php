@@ -22,8 +22,6 @@ class CheckoutController extends Controller
 
     public function checkout(CheckoutRequest $request)
     {
-        //TODO: validation of appplications array using FormRequest
-
         $user = $request->user();
 
         $applicationIds = $request->all()['applications'];
