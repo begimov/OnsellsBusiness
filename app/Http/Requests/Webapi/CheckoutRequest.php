@@ -29,4 +29,16 @@ class CheckoutRequest extends FormRequest
             'applications' => 'required|numeric_array'
         ];
     }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'applications.numeric_array' => 'Applications must be numeric array',
+        ];
+    }
 }
