@@ -26,7 +26,7 @@ class CheckoutRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'applications' => 'required|numeric_array'
         ];
     }
 }

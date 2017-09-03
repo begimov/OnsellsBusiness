@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\Contracts\TransactionRepository;
 use App\Repositories\Contracts\ApplicationRepository;
+use App\Http\Requests\Webapi\CheckoutRequest;
 
 class CheckoutController extends Controller
 {
@@ -19,7 +20,7 @@ class CheckoutController extends Controller
         $this->applicationRepository = $applicationRepository;
     }
 
-    public function checkout(Request $request)
+    public function checkout(CheckoutRequest $request)
     {
         //TODO: validation of appplications array using FormRequest
 
