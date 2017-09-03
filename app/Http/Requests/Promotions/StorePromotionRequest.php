@@ -24,7 +24,7 @@ class StorePromotionRequest extends FormRequest
     public function rules()
     {
         return [
-            'image' => 'required|image:max:2048',
+            'image' => 'required|image:max:10240',
             'category' => 'required|integer',
             'company' => 'required|max:255',
             'promotionname' => 'required|max:255',
