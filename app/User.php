@@ -56,7 +56,8 @@ class User extends Authenticatable
 
     public function applications()
     {
-        return Models\Promotions\Application::whereIn('promotion_id', $this->promotions->pluck('id'))->latest();
+        return Models\Promotions\Application::whereIn('promotion_id',
+            $this->promotions()->withTrashed()->pluck('id'))->latest();
     }
 
     public function balance()
