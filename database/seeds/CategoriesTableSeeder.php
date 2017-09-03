@@ -121,6 +121,11 @@ class CategoriesTableSeeder extends Seeder
         ['parent_id' => 7, 'name' => 'Цветы', 'slug' => 'cvety'],
         //Еда
         ['parent_id' => 4, 'name' => 'Караоке', 'slug' => 'karaoke'],
+        //Магазины
+        ['parent_id' => 7, 'name' => 'Детские магазины', 'slug' => 'detskie-magaziny'],
+        ['parent_id' => 7, 'name' => 'Аптеки', 'slug' => 'apteki'],
+        ['parent_id' => 7, 'name' => 'Питьевая вода', 'slug' => 'pityevaya-voda'],
+        ['parent_id' => 7, 'name' => 'Разливное пиво', 'slug' => 'razlivnoe-pivo'],
       ];
       foreach ($categories as $key => $value) {
         DB::table('categories')->insert($value);

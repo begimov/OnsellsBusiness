@@ -168,6 +168,7 @@ return [
          */
         Laravel\Tinker\TinkerServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -179,6 +180,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\RolesPermissionsServiceProvider::class,
         App\Providers\RepositoryServiceProvider::class,
+        App\Providers\ValidationRulesServiceProvider::class,
 
     ],
 

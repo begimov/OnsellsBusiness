@@ -24,7 +24,7 @@ class UpdatePromotionsRequest extends FormRequest
     public function rules()
     {
         return [
-            'image' => 'image:max:2048',
+            'image' => 'image:max:10240',
             'category' => 'required|integer',
             'company' => 'required|max:255',
             'promotionname' => 'required|max:255',
