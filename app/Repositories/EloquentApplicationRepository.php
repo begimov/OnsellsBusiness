@@ -12,13 +12,14 @@ class EloquentApplicationRepository implements ApplicationRepository
     {
         $applications = $user->applications()
             ->with(['user' => function($query)
-                { $query->select('id','name','email'); }, 'promotion'])
+                { $query->select('id','name','email','phone'); }, 'promotion'])
             ->take($num)
             ->get();
 
         $applications = array_map(function ($application) {
             if (!$application['paid']) {
                 $application['user']['email'] = '';
+                $application['user']['phone'] = '';
             }
             return $application;
         }, $applications->toArray());
