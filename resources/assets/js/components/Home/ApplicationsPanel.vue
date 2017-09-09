@@ -9,7 +9,7 @@
               <th></th>
               <th>Имя</th>
               <th>Email</th>
-              <th>Дата</th>
+              <th>Телефон</th>
             </tr>
           </thead>
           <tbody>
@@ -21,7 +21,10 @@
                   <p v-if="application.user.email">{{ application.user.email }}</p>
                   <p v-else>{{ new Array(Math.floor(Math.random() * 10 + 10) + 1).join('*') }}</p>
                 </td>
-                <td>{{ application.created_at }}</td>
+                <td>
+                  <p v-if="application.user.phone">{{ application.user.phone }}</p>
+                  <p v-else>{{ new Array(Math.floor(Math.random() * 10 + 10) + 1).join('*') }}</p>
+                </td>
               </tr>
             </template>
           </tbody>
