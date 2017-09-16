@@ -68,8 +68,8 @@ class PromotionController extends Controller
             // dispatch job for processing, saving, uploading to cloud and updating db
             // TODO: Quejob
             $saveDir = "promoimages/userId_{$promotion->user_id}/promoId_{$promotion->id}";
-            $pathToOriginal = $file->store($saveDir, 'public');
-            dispatch(new ProcessUploadedPromotionImage($pathToOriginal, $promotion));
+            $pathToOriginal = $request->file('image')->store($saveDir, 'public');
+            dispatch(new ProcessUploadedPromotionImage($pathToOriginal, $promotion, $saveDir));
             // $imageProcessor->resizeAndSaveImages($pathToOriginal, $promotion);
         }
 

@@ -18,7 +18,7 @@ class ImageProcessor {
         $this->storagePath = config('filesystems.disks.public.root');
     }
 
-    public function resizeAndSaveImages($pathToOriginal, Promotion $promotion)
+    public function resizeAndSaveImages($pathToOriginal, Promotion $promotion, $saveDir)
     {
         foreach ($this->imageSizes as $type => $params) {
             $fileName = "{$params[1]}x{$params[2]}.{$params[0]}";

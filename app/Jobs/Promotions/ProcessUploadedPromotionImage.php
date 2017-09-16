@@ -17,15 +17,18 @@ class ProcessUploadedPromotionImage implements ShouldQueue
 
     protected $promotion;
 
+    protected $saveDir;
+
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($pathToOriginal, $promotion)
+    public function __construct($pathToOriginal, $promotion, $saveDir)
     {
         $this->pathToOriginal = $pathToOriginal;
         $this->promotion = $promotion;
+        $this->saveDir = $saveDir;
     }
 
     /**
@@ -35,6 +38,6 @@ class ProcessUploadedPromotionImage implements ShouldQueue
      */
     public function handle(ImageProcessor $imageProcessor)
     {
-        $imageProcessor->resizeAndSaveImages($this->pathToOriginal, $this->promotion);
+        $imageProcessor->resizeAndSaveImages($this->pathToOriginal, $this->promotion, $this->saveDir);
     }
 }
