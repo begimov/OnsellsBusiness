@@ -14,21 +14,19 @@ class ProcessUploadedPromotionImage implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     protected $pathToOriginal;
-
     protected $promotion;
-
-    protected $saveDir;
+    protected $saveToPath;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($pathToOriginal, $promotion, $saveDir)
+    public function __construct($pathToOriginal, $promotion, $saveToPath)
     {
         $this->pathToOriginal = $pathToOriginal;
         $this->promotion = $promotion;
-        $this->saveDir = $saveDir;
+        $this->saveToPath = $saveToPath;
     }
 
     /**
@@ -38,6 +36,6 @@ class ProcessUploadedPromotionImage implements ShouldQueue
      */
     public function handle(ImageProcessor $imageProcessor)
     {
-        $imageProcessor->resizeAndSaveImages($this->pathToOriginal, $this->promotion, $this->saveDir);
+        $imageProcessor->resizeAndSaveImages($this->pathToOriginal, $this->promotion, $this->saveToPath);
     }
 }

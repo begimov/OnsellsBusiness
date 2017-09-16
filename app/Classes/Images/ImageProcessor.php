@@ -18,12 +18,12 @@ class ImageProcessor {
         $this->storagePath = config('filesystems.disks.public.root');
     }
 
-    public function resizeAndSaveImages($pathToOriginal, Promotion $promotion, $saveDir)
+    public function resizeAndSaveImages($pathToOriginal, Promotion $promotion, $saveToPath)
     {
         foreach ($this->imageSizes as $type => $params) {
             $fileName = "{$params[1]}x{$params[2]}.{$params[0]}";
-            $path = $this->storagePath . '/' . $saveDir . '/' . $fileName;
-            $relativePath = Storage::url($saveDir . '/' . $fileName);
+            $path = $this->storagePath . '/' . $saveToPath . '/' . $fileName;
+            $relativePath = Storage::url($saveToPath . '/' . $fileName);
 
             Image::make($this->storagePath . '/' . $pathToOriginal)
                 ->encode($params[0])->fit($params[1], $params[2], function ($c) {

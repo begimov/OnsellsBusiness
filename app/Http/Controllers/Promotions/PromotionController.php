@@ -65,12 +65,9 @@ class PromotionController extends Controller
         $promotion->save();
 
         if ($request->file('image')) {
-            // dispatch job for processing, saving, uploading to cloud and updating db
-            // TODO: Quejob
-            $saveDir = "promoimages/userId_{$promotion->user_id}/promoId_{$promotion->id}";
-            $pathToOriginal = $request->file('image')->store($saveDir, 'public');
-            dispatch(new ProcessUploadedPromotionImage($pathToOriginal, $promotion, $saveDir));
-            // $imageProcessor->resizeAndSaveImages($pathToOriginal, $promotion);
+            $saveToPath = $this->generateImagesPath($promotion);
+            $pathToOriginal = $request->file('image')->store($saveToPath, 'public');
+            dispatch(new ProcessUploadedPromotionImage($pathToOriginal, $promotion, $saveToPath));
         }
 
         $location = new Location;
@@ -127,9 +124,9 @@ class PromotionController extends Controller
         $promotion->save();
 
         if ($request->file('image')) {
-            // dispatch job for processing, saving, uploading to cloud and updating db
-            // TODO: Quejob
-            $imageProcessor->resizeAndSaveImages($request->file('image'), $promotion);
+            $saveToPath = $this->generateImagesPath($promotion);
+            $pathToOriginal = $request->file('image')->store($saveToPath, 'public');
+            dispatch(new ProcessUploadedPromotionImage($pathToOriginal, $promotion, $saveToPath));
         }
 
         return back()->with('status', 'Promotion updated!');
@@ -150,5 +147,10 @@ class PromotionController extends Controller
         $promotion->delete();
 
         return back();
+    }
+
+    protected function generateImagesPath($promotion)
+    {
+        return "promoimages/userId_{$promotion->user_id}/promoId_{$promotion->id}";
     }
 }
