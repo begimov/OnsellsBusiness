@@ -12,6 +12,8 @@ use App\Http\Requests\Promotions\StorePromotionRequest;
 use App\Http\Requests\Promotions\UpdatePromotionsRequest;
 use App\Classes\Images\ImageProcessor;
 
+use App\Jobs\Promotions\ProcessUploadedPromotionImage;
+
 class PromotionController extends Controller
 {
     public function __construct()
@@ -65,7 +67,10 @@ class PromotionController extends Controller
         if ($request->file('image')) {
             // dispatch job for processing, saving, uploading to cloud and updating db
             // TODO: Quejob
-            $imageProcessor->resizeAndSaveImages($request->file('image'), $promotion);
+            $saveDir = "promoimages/userId_{$promotion->user_id}/promoId_{$promotion->id}";
+            $pathToOriginal = $file->store($saveDir, 'public');
+            dispatch(new ProcessUploadedPromotionImage($pathToOriginal, $promotion));
+            // $imageProcessor->resizeAndSaveImages($pathToOriginal, $promotion);
         }
 
         $location = new Location;
