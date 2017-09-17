@@ -73,9 +73,10 @@ class PromotionController extends Controller
             dispatch(new ProcessUploadedPromotionImage($pathToOriginal, $promotion, $saveToPath));
         }
 
-        foreach ($request->address as $key => $value) {
+        foreach ($request->address as $key => $address) {
             $location = new Location;
             $location->location = "{$request->lat[$key]},{$request->lng[$key]}";
+            $location->address = $address;
             $location->promotion()->associate($promotion);
             $location->save();
         }
