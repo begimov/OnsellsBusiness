@@ -105,7 +105,12 @@
                     <p>{{ $errors->first('address.*') }}</p>
                   </div>
                 @endif
-                <input type="text" class="form-control" name="address[]" id="address" placeholder="Улица и дом">
+                <div class="input-group">
+                  <input type="text" class="form-control" name="address[]" id="address" placeholder="Улица и дом">
+                  <div class="input-group-btn">
+                    <a href="#" id="addaddress" class="btn btn-primary">Добавить</a>
+                  </div>
+                </div>
                 <input type="hidden" name="lat[]" id="lat" value="">
                 <input type="hidden" name="lng[]" id="lng" value="">
                 @if ($errors->has('lat.*'))
@@ -114,8 +119,6 @@
                   </div>
                 @endif
               </div>
-
-              <a href="" id="addaddress" class="btn btn-primary">+</a>
 
               <div class="map" id="map-canvas" style="width: 100%; height: 500px; margin-bottom: 30px;"></div>
 
