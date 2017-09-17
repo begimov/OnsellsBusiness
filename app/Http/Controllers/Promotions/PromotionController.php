@@ -49,9 +49,9 @@ class PromotionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-     // TODO: StorePromotionRequest
-    public function store(Request $request, ImageProcessor $imageProcessor)
+    public function store(StorePromotionRequest $request, ImageProcessor $imageProcessor)
     {
+      // TODO: DELETE
       dd($request->all());
         $this->authorize('create', Promotion::class);
 

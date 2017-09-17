@@ -100,17 +100,17 @@
 
               <div class="form-group" id="promo-addresses">
                 <label for="address">Адрес акции или компании</label>
-                @if ($errors->has('address'))
+                @if ($errors->has('address.*'))
                   <div class="help-block alert-danger">
-                    <p>{{ $errors->first('address') }}</p>
+                    <p>{{ $errors->first('address.*') }}</p>
                   </div>
                 @endif
                 <input type="text" class="form-control" name="address[]" id="address" placeholder="Улица и дом">
                 <input type="hidden" name="lat[]" id="lat" value="">
                 <input type="hidden" name="lng[]" id="lng" value="">
-                @if ($errors->has('lat'))
+                @if ($errors->has('lat.*'))
                   <div class="help-block alert-danger">
-                    <p>{{ $errors->first('lat') }}</p>
+                    <p>{{ $errors->first('lat.*') }}</p>
                   </div>
                 @endif
               </div>
