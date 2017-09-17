@@ -49,8 +49,10 @@ class PromotionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StorePromotionRequest $request, ImageProcessor $imageProcessor)
+     // TODO: StorePromotionRequest
+    public function store(Request $request, ImageProcessor $imageProcessor)
     {
+      dd($request->all());
         $this->authorize('create', Promotion::class);
 
         $promotion = new Promotion;
@@ -60,7 +62,8 @@ class PromotionController extends Controller
         $promotion->promotiondesc = $request->promotiondesc;
         $promotion->phone = $request->phone;
         $promotion->website = $request->website;
-        $promotion->address = $request->address;
+        // TODO: move address to location???
+        $promotion->address = $request->address[0];
         $promotion->user()->associate($request->user());
         $promotion->save();
 
@@ -70,10 +73,17 @@ class PromotionController extends Controller
             dispatch(new ProcessUploadedPromotionImage($pathToOriginal, $promotion, $saveToPath));
         }
 
-        $location = new Location;
-        $location->location = "{$request->lat},{$request->lng}";
-        $location->promotion()->associate($promotion);
-        $location->save();
+        foreach ($request->address as $key => $value) {
+            $location = new Location;
+            $location->location = "{$request->lat[$key]},{$request->lng[$key]}";
+            $location->promotion()->associate($promotion);
+            $location->save();
+        }
+
+        // $location = new Location;
+        // $location->location = "{$request->lat},{$request->lng}";
+        // $location->promotion()->associate($promotion);
+        // $location->save();
 
         return redirect()->route('home');
     }

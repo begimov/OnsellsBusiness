@@ -36,7 +36,6 @@ Route::group(['middleware' => ['auth', 'role:moderator']], function () {
 });
 
 // Manager panel
-// TODO: add separate 'manager' role and related features
 Route::group(['middleware' => ['auth', 'role:moderator']], function () {
     Route::get('/management', 'Admin\ManagementController@index')->name('management.index');
 });

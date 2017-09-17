@@ -38,7 +38,6 @@ class BalanceController extends Controller
             && $request->unaccepted == "false"
             && $request->codepro != "true") {
 
-            // TODO: Job, qeue send notification -> email
             $balance = $this->balanceRepository->findByUserId($request->label);
 
             $this->transactionRepository->store($balance, $request->withdraw_amount);
