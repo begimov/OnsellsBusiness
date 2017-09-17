@@ -51,8 +51,6 @@ class PromotionController extends Controller
      */
     public function store(StorePromotionRequest $request, ImageProcessor $imageProcessor)
     {
-      // TODO: DELETE
-      dd($request->all());
         $this->authorize('create', Promotion::class);
 
         $promotion = new Promotion;
@@ -63,7 +61,10 @@ class PromotionController extends Controller
         $promotion->phone = $request->phone;
         $promotion->website = $request->website;
         // TODO: move address to location???
-        $promotion->address = $request->address[0];
+        foreach($request->address as $address) {
+            $promotion->address = $address;
+            break;
+        }
         $promotion->user()->associate($request->user());
         $promotion->save();
 
@@ -80,11 +81,6 @@ class PromotionController extends Controller
             $location->promotion()->associate($promotion);
             $location->save();
         }
-
-        // $location = new Location;
-        // $location->location = "{$request->lat},{$request->lng}";
-        // $location->promotion()->associate($promotion);
-        // $location->save();
 
         return redirect()->route('home');
     }
@@ -152,7 +148,7 @@ class PromotionController extends Controller
     public function destroy(Promotion $promotion)
     {
         $this->authorize('destroy', $promotion);
-
+        // TODO: CHECK WHY deleting all locations with location()->delete()
         $promotion->images()->delete();
         $promotion->location()->delete();
         $promotion->delete();
