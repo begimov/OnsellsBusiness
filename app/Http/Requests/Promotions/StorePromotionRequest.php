@@ -16,6 +16,20 @@ class StorePromotionRequest extends FormRequest
         return true;
     }
 
+    public function all()
+    {
+        $attributes = parent::all();
+
+        if (!$attributes['address'][0] || !$attributes['lat'][0] 
+            || !$attributes['lng'][0]) {
+            unset($attributes['address'][0]);
+            unset($attributes['lat'][0]);
+            unset($attributes['lng'][0]);
+        }
+
+        return $attributes;
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -44,8 +58,8 @@ class StorePromotionRequest extends FormRequest
     public function messages()
     {
         return [
-            'address.*.required' => 'Необходим реальный адрес отмеченный на карте',
-            'lat.*.required' => 'Необходим реальный адрес отмеченный на карте',
+            'address.required' => 'Необходим хотя бы один адрес отмеченный на карте',
+            'lat.*.required' => 'Каждый адрес должен быть отмечен на карте',
         ];
     }
 }

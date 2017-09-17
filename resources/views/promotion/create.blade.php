@@ -100,9 +100,13 @@
 
               <div class="form-group" id="promo-addresses">
                 <label for="address">Адрес акции или компании</label>
-                @if ($errors->has('address.*'))
+                @if ($errors->has('address'))
                   <div class="help-block alert-danger">
-                    <p>{{ $errors->first('address.*') }}</p>
+                    <p>{{ $errors->first('address') }}</p>
+                  </div>
+                @elseif ($errors->has('lat.*'))
+                  <div class="help-block alert-danger">
+                    <p>{{ $errors->first('lat.*') }}</p>
                   </div>
                 @endif
                 <div class="input-group">
@@ -113,11 +117,6 @@
                 </div>
                 <input type="hidden" name="lat[]" id="lat" value="">
                 <input type="hidden" name="lng[]" id="lng" value="">
-                @if ($errors->has('lat.*'))
-                  <div class="help-block alert-danger">
-                    <p>{{ $errors->first('lat.*') }}</p>
-                  </div>
-                @endif
               </div>
 
               <div class="map" id="map-canvas" style="width: 100%; height: 500px; margin-bottom: 30px;"></div>
