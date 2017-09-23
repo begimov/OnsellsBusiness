@@ -112,7 +112,7 @@
                 <div class="input-group">
                   <input type="text" class="form-control" name="address[]" id="address" placeholder="Улица и дом">
                   <div class="input-group-btn">
-                    <a href="#" id="addaddress" class="btn btn-primary">Добавить</a>
+                    <a href="#" id="addaddress" class="btn btn-primary">Сохранить и добавить</a>
                   </div>
                 </div>
                 <input type="hidden" name="lat[]" id="lat" value="">

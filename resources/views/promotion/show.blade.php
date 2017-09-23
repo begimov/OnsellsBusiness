@@ -30,6 +30,16 @@
             <strong>Адрес:</strong><br>
             {{ $promotion->address }}
           </p>
+          <p>
+            @if (count($promotion->locations) > 1)
+              <strong>Дополнительные адреса:</strong><br>
+              @foreach ($promotion->locations as $key => $location)
+                @unless ($promotion->address === $location->address)
+                  {{ $location->address }}<br>
+                @endunless
+              @endforeach
+            @endif
+          </p>
           @isset($promotion->website)
             <p>
               <strong>Сайт:</strong><br>

@@ -24,12 +24,6 @@ class RouteServiceProvider extends ServiceProvider
     public function boot()
     {
         parent::boot();
-
-        Route::bind('promotion', function ($value) {
-            return \App\Models\Promotions\Promotion::where('id', $value)
-                ->with('locations')
-                ->first();
-        });
     }
 
     /**
