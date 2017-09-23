@@ -183,6 +183,13 @@ function initMap() {
 
 }
 
+function deleteAddress(elem) {
+  var name = $(elem).attr("name");
+  var elem = document.getElementById(name);
+  elem.parentNode.removeChild(elem);
+  return false;
+}
+
 </script>
 
 @section('postJquery')
@@ -194,8 +201,8 @@ function initMap() {
     address = $( "input#address" ).val();
     lat = $( "input#lat" ).val();
     lng = $( "input#lng" ).val();
-    if (address && lat && lng) {
-      $( "#promo-addresses" ).append('<p>' + address + '</p><input type="hidden" name="address[]" value="' + address + '"><input type="hidden" name="lat[]" value="' + lat + '"><input type="hidden" name="lng[]" value="' + lng + '">')
+    if (address && lat && lng && $('input[name*="address[]"]').length < 11) {
+      $( "#promo-addresses" ).append('<p id="' + lat + lng + '"><i>' + address + '</i>&nbsp;&nbsp;<strong><a href="#" class="btn btn-danger btn-xs" name="' + lat + lng + '" onclick="return deleteAddress(this)">Удалить</a></strong><input type="hidden" name="address[]" value="' + address + '"><input type="hidden" name="lat[]" value="' + lat + '"><input type="hidden" name="lng[]" value="' + lng + '"></p>');
     }
 
     $( "input#address" ).val('');
