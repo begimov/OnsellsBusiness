@@ -60,7 +60,7 @@ class PromotionController extends Controller
         $promotion->promotiondesc = $request->promotiondesc;
         $promotion->phone = $request->phone;
         $promotion->website = $request->website;
-        // TODO: move address to location???
+
         foreach($request->address as $address) {
             $promotion->address = $address;
             break;
@@ -148,9 +148,8 @@ class PromotionController extends Controller
     public function destroy(Promotion $promotion)
     {
         $this->authorize('destroy', $promotion);
-        // TODO: CHECK WHY deleting all locations with location()->delete()
         $promotion->images()->delete();
-        $promotion->location()->delete();
+        $promotion->locations()->delete();
         $promotion->delete();
 
         return back();
