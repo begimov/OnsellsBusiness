@@ -20,7 +20,7 @@ class StorePromotionRequest extends FormRequest
     {
         $attributes = parent::all();
 
-        if (!$attributes['address'][0] || !$attributes['lat'][0] 
+        if (!$attributes['address'][0] || !$attributes['lat'][0]
             || !$attributes['lng'][0]) {
             unset($attributes['address'][0]);
             unset($attributes['lat'][0]);
@@ -38,14 +38,13 @@ class StorePromotionRequest extends FormRequest
     public function rules()
     {
         return [
-          // TODO: TURN ON
-            // 'image' => 'required|image|max:5400',
-            // 'category' => 'required|integer',
-            // 'company' => 'required|max:255',
-            // 'promotionname' => 'required|max:255',
-            // 'promotiondesc' => 'required|max:3000',
-            // 'phone' => 'required|max:255',
-            // 'website' => ['regex:/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/','nullable','max:255'],
+            'image' => 'required|image|max:5400',
+            'category' => 'required|integer',
+            'company' => 'required|max:255',
+            'promotionname' => 'required|max:255',
+            'promotiondesc' => 'required|max:3000',
+            'phone' => 'required|max:255',
+            'website' => ['regex:/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/','nullable','max:255'],
             'address' => 'required|array',
             'lat' => 'required|array',
             'lng' => 'required|array',
