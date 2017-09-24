@@ -60,7 +60,11 @@ class PromotionController extends Controller
         $promotion->promotiondesc = $request->promotiondesc;
         $promotion->phone = $request->phone;
         $promotion->website = $request->website;
-        $promotion->address = $request->address;
+
+        foreach($request->address as $address) {
+            $promotion->address = $address;
+            break;
+        }
         $promotion->user()->associate($request->user());
         $promotion->save();
 
@@ -70,10 +74,13 @@ class PromotionController extends Controller
             dispatch(new ProcessUploadedPromotionImage($pathToOriginal, $promotion, $saveToPath));
         }
 
-        $location = new Location;
-        $location->location = "{$request->lat},{$request->lng}";
-        $location->promotion()->associate($promotion);
-        $location->save();
+        foreach ($request->address as $key => $address) {
+            $location = new Location;
+            $location->location = "{$request->lat[$key]},{$request->lng[$key]}";
+            $location->address = $address;
+            $location->promotion()->associate($promotion);
+            $location->save();
+        }
 
         return redirect()->route('home');
     }
@@ -141,9 +148,8 @@ class PromotionController extends Controller
     public function destroy(Promotion $promotion)
     {
         $this->authorize('destroy', $promotion);
-
         $promotion->images()->delete();
-        $promotion->location()->delete();
+        $promotion->locations()->delete();
         $promotion->delete();
 
         return back();
