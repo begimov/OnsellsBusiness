@@ -126,6 +126,23 @@ class CategoriesTableSeeder extends Seeder
         ['parent_id' => 7, 'name' => 'Аптеки', 'slug' => 'apteki'],
         ['parent_id' => 7, 'name' => 'Питьевая вода', 'slug' => 'pityevaya-voda'],
         ['parent_id' => 7, 'name' => 'Разливное пиво', 'slug' => 'razlivnoe-pivo'],
+        //Магазины
+        ['parent_id' => 7, 'name' => 'Ювелирные магазины', 'slug' => 'uvelirnye-magaziny'],
+        ['parent_id' => 7, 'name' => 'Бытовая техника и электроника', 'slug' => 'bytovaya-tehnika-i-elektronika'],
+        ['parent_id' => 7, 'name' => 'Спортивное питание', 'slug' => 'sportivnoe-pitanie'],
+        //Обучение
+        ['parent_id' => 8, 'name' => 'Музыкальные школы', 'slug' => 'muzykalynye-shkoly'],
+        ['parent_id' => 8, 'name' => 'Автошколы', 'slug' => 'avtoshkoly'],
+        //Услуги
+        ['parent_id' => 10, 'name' => 'Прачечные', 'slug' => 'prachechnye'],
+        ['parent_id' => 10, 'name' => 'Банки', 'slug' => 'banki'],
+        ['parent_id' => 10, 'name' => 'Недвижимость', 'slug' => 'nedvizhimosty'],
+        ['parent_id' => 10, 'name' => 'Ателье', 'slug' => 'atelye'],
+        //Развлечения
+        ['parent_id' => 9, 'name' => 'Ночные клубы', 'slug' => 'nochnye-kluby'],
+        ['parent_id' => 9, 'name' => 'Экскурсии и выставки', 'slug' => 'ekskursii-i-vystavki'],
+        //Красота и здоровье
+        ['parent_id' => 6, 'name' => 'Массаж', 'slug' => 'massazh'],
       ];
       foreach ($categories as $key => $value) {
         DB::table('categories')->insert($value);
