@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\User as Business;
 use App\Models\Promotions\User;
 use App\Models\Promotions\Promotion;
+use App\Models\Promotions\Application;
 use App\Models\Balance\Balance;
 
 class ManagementController extends Controller
@@ -35,8 +36,9 @@ class ManagementController extends Controller
         $promotionsCount = count(Promotion::all());
         $usersCount = count(User::all());
         $balancesTotal = Balance::sum('amount');
+        $applicationsCount = count(Application::all());
 
-        return compact('businessesCount', 'promotionsCount', 'usersCount', 'balancesTotal');
+        return compact('businessesCount', 'promotionsCount', 'usersCount', 'balancesTotal', 'applicationsCount');
     }
 
     private function sortIndexData(Request $request, $data)

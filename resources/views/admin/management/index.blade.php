@@ -8,17 +8,20 @@
   <div class="container">
 
     <div class="row text-center">
-      <div class="col-md-3 col-sm-3">
-        <h2><small>Бизнесов: </small>{{ $stats['businessesCount'] }}</h2>
+      <div class="col-md-2 col-sm-6 col-xs-6">
+        <h2><small>Бизнесов:<br></small>{{ $stats['businessesCount'] }}</h2>
       </div>
-      <div class="col-md-3 col-sm-3">
-        <h2><small>Акций: </small>{{ $stats['promotionsCount'] }}</h2>
+      <div class="col-md-2 col-sm-6 col-xs-6">
+        <h2><small>Акций:<br></small>{{ $stats['promotionsCount'] }}</h2>
       </div>
-      <div class="col-md-3 col-sm-3">
-        <h2><small>Пользователей: </small>{{ $stats['usersCount'] }}</h2>
+      <div class="col-md-2 col-sm-6 col-xs-6">
+        <h2><small>Польз.:<br></small>{{ $stats['usersCount'] }}</h2>
       </div>
-      <div class="col-md-3 col-sm-3">
-        <h2><small>На балансах: </small>{{ $stats['balancesTotal'] }}</h2>
+      <div class="col-md-2 col-sm-6 col-xs-6">
+        <h2><small>Балансы:<br></small>{{ $stats['balancesTotal'] }}</h2>
+      </div>
+      <div class="col-md-2 col-sm-6 col-xs-6">
+        <h2><small>Заявок:<br></small>{{ $stats['applicationsCount'] }}</h2>
       </div>
     </div>
 
