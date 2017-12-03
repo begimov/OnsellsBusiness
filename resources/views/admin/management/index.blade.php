@@ -9,23 +9,41 @@
 
     <div class="row text-center">
       <div class="col-md-2 col-sm-6 col-xs-6">
-        <h2><small>Бизнесов:<br></small>{{ $stats['businessesCount'] }}</h2>
+        <div class="panel panel-default">
+          <div class="panel-body bg-primary">
+            <span class="lead">Бизнесов:<br><strong>{{ $stats['businessesCount'] }}</strong></span>
+          </div>
+        </div>
       </div>
       <div class="col-md-2 col-sm-6 col-xs-6">
-        <h2><small>Акций:<br></small>{{ $stats['promotionsCount'] }}</h2>
+        <div class="panel panel-default">
+          <div class="panel-body bg-primary">
+            <span class="lead">Акций:<br><strong>{{ $stats['promotionsCount'] }}</strong></span>
+          </div>
+        </div>
       </div>
       <div class="col-md-2 col-sm-6 col-xs-6">
-        <h2><small>Польз.:<br></small>{{ $stats['usersCount'] }}</h2>
+        <div class="panel panel-default">
+          <div class="panel-body bg-primary">
+            <span class="lead">Польз.:<br><strong>{{ $stats['usersCount'] }}</strong></span>
+          </div>
+        </div>
       </div>
       <div class="col-md-2 col-sm-6 col-xs-6">
-        <h2><small>Балансы:<br></small>{{ $stats['balancesTotal'] }}</h2>
+        <div class="panel panel-default">
+          <div class="panel-body bg-primary">
+            <span class="lead">Балансы:<br><strong>{{ $stats['balancesTotal'] }}</strong></span>
+          </div>
+        </div>
       </div>
       <div class="col-md-2 col-sm-6 col-xs-6">
-        <h2><small>Заявок:<br></small>{{ $stats['applicationsCount'] }}</h2>
+        <div class="panel panel-default">
+          <div class="panel-body bg-primary">
+            <span class="lead">Заявок:<br><strong>{{ $stats['applicationsCount'] }}</strong></span>
+          </div>
+        </div>
       </div>
     </div>
-
-    <hr>
 
     <div class="row">
       <div class="col-md-12">
