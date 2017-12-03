@@ -49,6 +49,7 @@
       <div class="col-md-12">
         <ul class="nav nav-tabs">
           <li role="presentation" class="active"><a href="#">Бизнесы</a></li>
+          <li role="presentation"><a href="{{ route('login') }}">Заявки</a></li>
         </ul>
         <div class="panel panel-default">
           <div class="panel-body">
