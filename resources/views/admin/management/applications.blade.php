@@ -48,49 +48,35 @@
     <div class="row">
       <div class="col-md-12">
         <ul class="nav nav-tabs">
-          <li role="presentation" class="active"><a href="#">Бизнесы</a></li>
-          <li role="presentation"><a href="{{ route('management.applications') }}">Заявки</a></li>
+          <li role="presentation"><a href="{{ route('management.index') }}">Бизнесы</a></li>
+          <li role="presentation" class="active"><a href="#">Заявки</a></li>
         </ul>
         <div class="panel panel-default">
           <div class="panel-body">
             <table class="table table-hover table-condensed">
               <thead>
                 <tr>
-                  <th>Название</th>
+                  <th>Имя</th>
                   <th>Email</th>
                   <th>Телефон</th>
-                  <th>Категория</th>
-                  <th>
-                    <a href="{{ route('management.index', ['sortDateOrder' => $nextSortDateOrder]) }}">
-                      Дата
-                    </a>
-                  </th>
-                  <th>
-                    <a href="{{ route('management.index', ['sortPromotionsOrder' => $nextSortPromotionsOrder]) }}">
-                      Акций
-                    </a>
-                  </th>
-                  <th>Заявок</th>
-                  <th>Баланс</th>
+                  <th>Ссылка на акцию</th>
                 </tr>
               </thead>
               <tbody>
-                @foreach ($businesses as $business)
+              @foreach ($applications as $application)
                   <tr>
-                    <td>{{ $business->name }}</td>
-                    <td><a href="mailto:{{ $business->email }}">{{ $business->email }}</a></td>
-                    <td>{{ count($business->promotions) > 0 ? $business->promotions[0]->phone : '-' }}</td>
-                    <td>{{ count($business->promotions) > 0 ? $business->promotions[0]->category->name : '-' }}</td>
-                    <td>{{ $business->created_at->format('d/m/y') }}</td>
-                    <td>{{ count($business->promotions) }}</td>
-                    <td>-</td>
-                    <td>{{ $business->balance->amount }}</td>
+                    <td>{{ $application->user->name }}</td>
+                    <td><a href="mailto:{{ $application->user->email }}">{{ $application->user->email }}</a></td>
+                    <td>{{ $application->user->phone }}</td>
+                    @if($application->promotion['id'])
+                      <td><a href="{{ route('promotion.show', $application->promotion['id']) }}" target="_blank">Открыть</a></td>
+                    @endif
                   </tr>
                 @endforeach
               </tbody>
             </table>
           </div>
-          <div class="panel-footer">{{ $businesses->links() }}</div>
+          <div class="panel-footer">{{ $applications->links() }}</div>
         </div>
       </div>
     </div>

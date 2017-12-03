@@ -30,6 +30,18 @@ class ManagementController extends Controller
         ]);
     }
 
+    public function applications(Request $request)
+    {
+        $stats = $this->getStats();
+
+        $applications = Application::with(['user', 'promotion'])->latest()->paginate(50);
+
+        return view('admin.management.applications', [
+            'stats' => $stats,
+            'applications' => $applications,
+        ]);
+    }
+
     public function getStats()
     {
         $businessesCount = count(Business::all());
