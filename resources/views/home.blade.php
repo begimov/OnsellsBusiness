@@ -7,6 +7,15 @@
 @section('content')
 <div class="container">
   <div class="row">
+    <div class="col-md-12 text-center">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          В&nbsp;случае возникновения проблем или вопросов,<br>пожалуйста, свяжитесь с&nbsp;менеджером по&nbsp;телефону <span class="glyphicon glyphicon-phone" aria-hidden="true"></span> 8&nbsp;(981)&nbsp;698-98-83 или в&nbsp;телеграм
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
     <div class="col-md-7">
       <div class="panel panel-default">
         <div class="panel-heading">Акции</div>
