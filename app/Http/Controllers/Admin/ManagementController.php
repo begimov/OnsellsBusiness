@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\User as Business;
 use App\Models\Promotions\User;
 use App\Models\Promotions\Promotion;
+use App\Models\Promotions\Application;
 use App\Models\Balance\Balance;
 
 class ManagementController extends Controller
@@ -15,7 +16,7 @@ class ManagementController extends Controller
     {
         $stats = $this->getStats();
 
-        $businesses = $this->sortIndexData($request, Business::with(['promotions', 'balance']))->paginate(50)
+        $businesses = $this->sortIndexData($request, Business::with(['promotions', 'balance', 'promotions.category']))->paginate(50)
             ->appends([
                 'sortPromotionsOrder' => $request->sortPromotionsOrder,
                 'sortDateOrder' => $request->sortDateOrder
@@ -29,14 +30,27 @@ class ManagementController extends Controller
         ]);
     }
 
+    public function applications(Request $request)
+    {
+        $stats = $this->getStats();
+
+        $applications = Application::with(['user', 'promotion'])->latest()->paginate(50);
+
+        return view('admin.management.applications', [
+            'stats' => $stats,
+            'applications' => $applications,
+        ]);
+    }
+
     public function getStats()
     {
         $businessesCount = count(Business::all());
         $promotionsCount = count(Promotion::all());
         $usersCount = count(User::all());
         $balancesTotal = Balance::sum('amount');
+        $applicationsCount = count(Application::all());
 
-        return compact('businessesCount', 'promotionsCount', 'usersCount', 'balancesTotal');
+        return compact('businessesCount', 'promotionsCount', 'usersCount', 'balancesTotal', 'applicationsCount');
     }
 
     private function sortIndexData(Request $request, $data)

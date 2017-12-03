@@ -38,6 +38,7 @@ Route::group(['middleware' => ['auth', 'role:moderator']], function () {
 // Manager panel
 Route::group(['middleware' => ['auth', 'role:moderator']], function () {
     Route::get('/management', 'Admin\ManagementController@index')->name('management.index');
+    Route::get('/management/applications', 'Admin\ManagementController@applications')->name('management.applications');
 });
 
 // Payments, balance and finances
