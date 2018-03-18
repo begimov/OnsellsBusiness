@@ -15,7 +15,7 @@
               В&nbsp;случае возникновения проблем или вопросов,<br>пожалуйста, свяжитесь с&nbsp;менеджером по&nbsp;телефону <span class="glyphicon glyphicon-phone" aria-hidden="true"></span> 8&nbsp;(981)&nbsp;698-98-83 или в&nbsp;телеграм  
             </div>
             <div class="col-md-5 text-center">
-              <a href="{{ route('home') }}" target="_blank" class="btn btn-primary">Как начать работу с заявками?</a>
+              <a href="{{ route('home.appshelp') }}" target="_blank" class="btn btn-primary">Как начать работу с заявками?</a>
             </div>
           </div>
         </div>
