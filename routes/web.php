@@ -23,9 +23,11 @@ Route::group(['middleware' => 'guest', 'namespace' => 'Welcome'], function () {
 
 Auth::routes();
 
-// User's Dashboard/Panel related
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/home/appshelp', 'HomeController@appshelp')->name('home.appshelp');
+// User's Dashboard/Panel/Home related
+Route::group(['middleware' => 'auth', 'prefix' => 'home'], function () {
+    Route::get('/', 'HomeController@index')->name('home');
+    Route::get('/appshelp', 'HomeController@appshelp')->name('home.appshelp');
+});
 
 // Promotions
 Route::resource('promotion', 'Promotions\PromotionController');
