@@ -112,8 +112,13 @@
     <div class="row">
         <div class="col-md-12">
             <h3 class="text-success">Вы можете отправить заявку в брак, если она соответствует одной из нижеуказанных причин:</h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
             <p>
-                <ol>
+                <ul>
                     <li>
                         <p>
                             <strong>Справочная информация</strong>
@@ -146,6 +151,12 @@
                         </p>
                         <p>Несуществующий номер телефона, некорректный номер телефона.</p>
                     </li>
+                </ul>
+            </p>
+        </div>
+        <div class="col-md-6">
+            <p>
+                <ul>
                     <li>
                         <p>
                             <strong>Непрофильный клиент</strong>
@@ -187,19 +198,23 @@
                         <p>Вы&nbsp;звоните по&nbsp;заявке в&nbsp;течение 15&nbsp;минут с&nbsp;момента её&nbsp;поступления, а&nbsp;клиент
                             сообщает, что вопрос уже решен или помощь в&nbsp;решении ему не&nbsp;требуется.</p>
                     </li>
-                </ol>
+                </ul>
             </p>
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-12">
-            <h3>Остались вопросы?</h3>
-            <p>Напишите нам по&nbsp;адресу
-                <a href="mailto:admin@onsells.ru">admin@onsells.ru</a> и&nbsp;мы&nbsp;с&nbsp;удовольствием вам поможем.</p>
-            <p>Также вы&nbsp;можете позвонить вашему менеджеру по&nbsp;телефону
-                <strong>8&nbsp;981&nbsp;698 98&nbsp;83</strong>
-            </p>
+            <div class="panel panel-default">
+                <div class="panel-body text-center">
+                    <h3>Остались вопросы?</h3>
+                    <p>Напишите нам по&nbsp;адресу
+                        <a href="mailto:admin@onsells.ru">admin@onsells.ru</a> и&nbsp;мы&nbsp;с&nbsp;удовольствием вам поможем.</p>
+                    <p>Также вы&nbsp;можете позвонить вашему менеджеру по&nbsp;телефону
+                        <strong>8&nbsp;981&nbsp;698 98&nbsp;83</strong>
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
 
