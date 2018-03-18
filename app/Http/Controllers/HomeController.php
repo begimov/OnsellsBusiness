@@ -54,6 +54,6 @@ class HomeController extends Controller
      */
     public function appshelp(Request $request)
     {
-        return view('home');
+        return view('home.appshelp');
     }
 }
