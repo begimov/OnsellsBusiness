@@ -60,3 +60,12 @@ body {
 iframe {
   max-width: 100%;
 }
+
+.jumbotron-appshelp {
+  background-color: #2e353b !important;
+  color: #fff;
+}
+
+.last-row {
+  margin-bottom: 40px;
+}

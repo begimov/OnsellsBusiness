@@ -1,15 +1,18 @@
 @extends('layouts.app') @section('titleandmetatags') @include('layouts.partials._metatags') @endsection @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <h2>Как начать работу с заявками</h2>
-            <h3>Что такое заявка?</h3>
-            <p class="lead">Заявка (лид)&nbsp;&mdash; это заинтересованность в&nbsp;вашей акции потенциальным клиентом вместе с&nbsp;его
-                контактными данными.</p>
-        </div>
-    </div>
 
-    <div class="row">
+<div class="jumbotron jumbotron-appshelp last-row">
+    <div class="container">
+        <h1>Как начать работу с заявками</h1>
+        <h2>Что такое заявка?</h2>
+        <p class="lead">Заявка (лид)&nbsp;&mdash; это заинтересованность в&nbsp;вашей акции потенциальным клиентом вместе с&nbsp;его контактными
+            данными.
+        </p>
+    </div>
+</div>
+
+<div class="container">
+
+    <div class="row last-row">
         <div class="col-md-7">
             <h3>Зачем мне покупать заявку?</h3>
             <p>На&nbsp;сегодняшний день покупка заявок (лидов) является самой эффективной схемой привлечения клиентов для вашего
@@ -25,7 +28,7 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row last-row">
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-body text-center">
@@ -36,7 +39,7 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row last-row">
         <div class="col-md-7">
             <h3>Гарантирует ли заявка получение клиента?</h3>
             <p>Качественная заявка позволяет сразу оказать клиенту платную услугу в&nbsp;среднем в ⅓ случаев. Остальное зависит
@@ -50,7 +53,7 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row last-row">
         <div class="col-md-5">
             <p>[IMG]</p>
             <h3>Как получать заявки?</h3>
@@ -71,29 +74,33 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row last-row">
         <div class="col-md-12">
-            <h3>Как оплачивать заявку? </h3>
-            <p>
-                <ol>
-                    <li>Получаете заявку в&nbsp;личный кабинет
-                        <p>[IMG]</p>
-                    </li>
-                    <li>Пополняете баланс для открытия контактов
-                        <p>[IMG]</p>
-                    </li>
-                    <li>Открываете контакты
-                        <p>[IMG]</p>
-                    </li>
-                    <li>Связываетесь с клиентом
-                        <p>[IMG]</p>
-                    </li>
-                </ol>
-            </p>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3>Как оплачивать заявку? </h3>
+                    <p>
+                        <ol>
+                            <li>Получаете заявку в&nbsp;личный кабинет
+                                <p>[IMG]</p>
+                            </li>
+                            <li>Пополняете баланс для открытия контактов
+                                <p>[IMG]</p>
+                            </li>
+                            <li>Открываете контакты
+                                <p>[IMG]</p>
+                            </li>
+                            <li>Связываетесь с клиентом
+                                <p>[IMG]</p>
+                            </li>
+                        </ol>
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="row">
+    <div class="row last-row">
         <div class="col-md-12">
             <h3>Отбраковка</h3>
             <p>Вы&nbsp;можете отправить в&nbsp;брак до&nbsp;30% заявок, полученных за&nbsp;последние двое суток.</p>
@@ -115,7 +122,7 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row last-row">
         <div class="col-md-6">
             <p>
                 <ul>
@@ -203,7 +210,7 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row last-row">
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-body text-center">
