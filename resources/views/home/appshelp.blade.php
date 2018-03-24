@@ -24,7 +24,7 @@
         </div>
         <div class="col-md-5">
             <h3>Обычно заявка выглядит так:</h3>
-            <p>[IMG]</p>
+            <p><img src="{{ asset('img/appshelp/application.png') }}"></p>
         </div>
     </div>
 
