@@ -14,28 +14,31 @@
 
     <div class="row last-row">
         <div class="col-md-7">
-            <h3>Зачем мне покупать заявку?</h3>
-            <p>На&nbsp;сегодняшний день покупка заявок (лидов) является самой эффективной схемой привлечения клиентов для вашего
-                бизнеса.
-            </p>
-            <p>Покупая лид, вы, тем самым, приобретаете возможного клиента, который готов заплатить деньги и&nbsp;воспользоваться
-                вашей услугой&nbsp;и, возможно, не&nbsp;одной. При этом контакты клиента из&nbsp;приобретенной заявки будут
-                доступны только вам.</p>
+            <div class="row last-row">
+                <div class="col-md-12">
+                    <h3>Зачем мне покупать заявку?</h3>
+                    <p>На&nbsp;сегодняшний день покупка заявок (лидов) является самой эффективной схемой привлечения клиентов для вашего
+                        бизнеса.
+                    </p>
+                    <p>Покупая лид, вы, тем самым, приобретаете возможного клиента, который готов заплатить деньги и&nbsp;воспользоваться
+                        вашей услугой&nbsp;и, возможно, не&nbsp;одной. При этом контакты клиента из&nbsp;приобретенной заявки будут
+                        доступны только вам.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-body text-center">
+                            <h3>Сколько стоит заявка?</h3>
+                            <p class="lead">Стоимость заявки составляет 100 рублей.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="col-md-5">
             <h3>Обычно заявка выглядит так:</h3>
-            <p><img src="{{ asset('img/appshelp/application.png') }}"></p>
-        </div>
-    </div>
-
-    <div class="row last-row">
-        <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-body text-center">
-                    <h3>Сколько стоит заявка?</h3>
-                    <p class="lead">Стоимость заявки составляет 100 рублей.</p>
-                </div>
-            </div>
+            <p><img src="{{ asset('img/appshelp/application.png') }}" class="img-responsive"></p>
         </div>
     </div>
 
@@ -49,7 +52,7 @@
                 дальнейшего успешного взаимодействия с&nbsp;клиентом.</p>
         </div>
         <div class="col-md-5">
-            [IMG]
+            <p><img src="{{ asset('img/appshelp/funnel.png') }}" class="img-responsive"></p>
         </div>
     </div>
 
