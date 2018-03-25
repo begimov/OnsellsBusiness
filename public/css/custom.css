@@ -62,7 +62,8 @@ iframe {
 }
 
 .jumbotron-appshelp {
-  background-color: #2e353b !important;
+  background-image: url('../img/appshelp/queue_bg.jpg');
+  background-size: cover;
   color: #fff;
 }
 

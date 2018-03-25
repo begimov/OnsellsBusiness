@@ -91,14 +91,11 @@
                         <p><img src="{{ asset('img/appshelp/replenishment.png') }}" class="img-responsive"></p>
                     </li>
                     <li class="list-group-item">
-                        Открываете контакты
-                        <p>[IMG]</p>
-                    </li>
-                    <li class="list-group-item">
-                        Связываетесь с клиентом
-                        <p>[IMG]</p>
+                        <h4>3.&nbsp;Открываете контакты</h4>
+                        <p><img src="{{ asset('img/appshelp/open_application.png') }}" class="img-responsive"></p>
                     </li>
                 </ul>
+                <div class="panel-footer"><span class="lead"><strong>4.Связываетесь с клиентом</strong></span></div>
             </div>
         </div>
         <div class="col-md-5">
