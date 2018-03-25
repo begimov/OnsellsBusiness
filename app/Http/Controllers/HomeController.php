@@ -17,7 +17,6 @@ class HomeController extends Controller
      */
     public function __construct(ApplicationRepository $applicationRepository)
     {
-        $this->middleware('auth');
         $this->applicationRepository = $applicationRepository;
     }
 
@@ -46,5 +45,15 @@ class HomeController extends Controller
         $viewsData = $googleanalytics->getPromotionsViewsReport($allPromotions);
 
         return view('home', compact('promotions', 'promocount', 'viewsData', 'applications', 'balance'));
+    }
+
+    /**
+     * Show applications related help page.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function appshelp(Request $request)
+    {
+        return view('home.appshelp');
     }
 }
