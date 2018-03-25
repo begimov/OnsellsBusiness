@@ -78,33 +78,30 @@
     </div>
 
     <div class="row last-row">
-        <div class="col-md-12">
+        <div class="col-md-7">
             <div class="panel panel-default">
-                <div class="panel-body">
-                    <h3>Как оплачивать заявку? </h3>
-                    <p>
-                        <ol>
-                            <li>Получаете заявку в&nbsp;личный кабинет
-                                <p>[IMG]</p>
-                            </li>
-                            <li>Пополняете баланс для открытия контактов
-                                <p>[IMG]</p>
-                            </li>
-                            <li>Открываете контакты
-                                <p>[IMG]</p>
-                            </li>
-                            <li>Связываетесь с клиентом
-                                <p>[IMG]</p>
-                            </li>
-                        </ol>
-                    </p>
-                </div>
+                <div class="panel-heading"><span class="lead"><strong>Как оплачивать заявку?</strong></span></div>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <h4>1.&nbsp;Получаете заявку в&nbsp;личный кабинет</h4>
+                        <p><img src="{{ asset('img/appshelp/single_application.png') }}" class="img-responsive"></p>
+                    </li>
+                    <li class="list-group-item">
+                        <h4>2.&nbsp;Пополняете баланс для открытия контактов</h4>
+                        <p><img src="{{ asset('img/appshelp/replenishment.png') }}" class="img-responsive"></p>
+                    </li>
+                    <li class="list-group-item">
+                        Открываете контакты
+                        <p>[IMG]</p>
+                    </li>
+                    <li class="list-group-item">
+                        Связываетесь с клиентом
+                        <p>[IMG]</p>
+                    </li>
+                </ul>
             </div>
         </div>
-    </div>
-
-    <div class="row last-row">
-        <div class="col-md-12">
+        <div class="col-md-5">
             <h3>Отбраковка</h3>
             <p>Вы&nbsp;можете отправить в&nbsp;брак до&nbsp;30% заявок, полученных за&nbsp;последние двое суток.</p>
             <p>Заявку, возможно, отбраковать в&nbsp;течение двух суток с&nbsp;момента её&nbsp;поступления на&nbsp;сайт.</p>
