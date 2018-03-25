@@ -52,13 +52,13 @@
                 дальнейшего успешного взаимодействия с&nbsp;клиентом.</p>
         </div>
         <div class="col-md-5">
-            <p><img src="{{ asset('img/appshelp/funnel.png') }}" class="img-responsive"></p>
+            <p class="text-center"><img src="{{ asset('img/appshelp/funnel.png') }}"></p>
         </div>
     </div>
 
     <div class="row last-row">
         <div class="col-md-5">
-            <p>[IMG]</p>
+            <p class="text-center"><img src="{{ asset('img/appshelp/notifications.png') }}"></p>
             <h3>Как получать заявки?</h3>
             <p>Доступ к&nbsp;функционалу лидов получает любая авторизованная на&nbsp;нашем сайте компания. Получать лиды можно
                 одним способом:
