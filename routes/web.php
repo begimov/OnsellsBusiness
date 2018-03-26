@@ -26,8 +26,8 @@ Auth::routes();
 // User's Dashboard/Panel/Home related
 Route::group(['middleware' => 'auth', 'prefix' => 'home'], function () {
     Route::get('/', 'HomeController@index')->name('home');
-    Route::get('/appshelp', 'HomeController@appshelp')->name('home.appshelp');
 });
+Route::get('/home/appshelp', 'HomeController@appshelp')->name('home.appshelp');
 
 // Promotions
 Route::resource('promotion', 'Promotions\PromotionController');
